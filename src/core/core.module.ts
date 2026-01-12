@@ -6,6 +6,7 @@ import config from '../config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TransformResponseInterceptor } from './interceptors/transform-response/transform-response.interceptor';
 import { CacheService } from './cache/cache.service';
+import { JwtAuthGuard } from './auth/auth.guard';
 
 @Global()
 @Module({
@@ -20,7 +21,8 @@ import { CacheService } from './cache/cache.service';
     },
     LoggerService,
     CacheService,
+    JwtAuthGuard,
   ],
-  exports: [DatabaseModule, LoggerService, CacheService],
+  exports: [DatabaseModule, LoggerService, CacheService, JwtAuthGuard],
 })
 export class CoreModule {}

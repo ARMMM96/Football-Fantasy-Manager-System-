@@ -1,0 +1,159 @@
+{
+      "info": {
+            "_postman_id": "football-manager-auth-api",
+            "name": "Football Manager - Auth API",
+            "description": "Authentication endpoints for Football Fantasy Manager System",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+      },
+      "item": [
+            {
+                  "name": "Auth",
+                  "item": [
+                        {
+                              "name": "Register",
+                              "request": {
+                                    "method": "POST",
+                                    "header": [
+                                          {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                          }
+                                    ],
+                                    "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+                                    },
+                                    "url": {
+                                          "raw": "{{baseUrl}}/auth/register",
+                                          "host": [
+                                                "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                                "auth",
+                                                "register"
+                                          ]
+                                    },
+                                    "description": "Register a new user account"
+                              },
+                              "response": []
+                        },
+                        {
+                              "name": "Login",
+                              "event": [
+                                    {
+                                          "listen": "test",
+                                          "script": {
+                                                "exec": [
+                                                      "// Automatically save the access token to environment",
+                                                      "if (pm.response.code === 200) {",
+                                                      "    const responseJson = pm.response.json();",
+                                                      "    if (responseJson.data && responseJson.data.accessToken) {",
+                                                      "        pm.environment.set(\"accessToken\", responseJson.data.accessToken);",
+                                                      "        console.log(\"Access token saved to environment\");",
+                                                      "    }",
+                                                      "}"
+                                                ],
+                                                "type": "text/javascript"
+                                          }
+                                    }
+                              ],
+                              "request": {
+                                    "method": "POST",
+                                    "header": [
+                                          {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                          }
+                                    ],
+                                    "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+                                    },
+                                    "url": {
+                                          "raw": "{{baseUrl}}/auth/login",
+                                          "host": [
+                                                "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                                "auth",
+                                                "login"
+                                          ]
+                                    },
+                                    "description": "Login with existing user credentials. Automatically saves the JWT token to environment variable."
+                              },
+                              "response": []
+                        },
+                        {
+                              "name": "Get Profile",
+                              "request": {
+                                    "auth": {
+                                          "type": "bearer",
+                                          "bearer": [
+                                                {
+                                                      "key": "token",
+                                                      "value": "{{accessToken}}",
+                                                      "type": "string"
+                                                }
+                                          ]
+                                    },
+                                    "method": "GET",
+                                    "header": [],
+                                    "url": {
+                                          "raw": "{{baseUrl}}/auth/profile",
+                                          "host": [
+                                                "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                                "auth",
+                                                "profile"
+                                          ]
+                                    },
+                                    "description": "Get current user profile (requires authentication)"
+                              },
+                              "response": []
+                        },
+                        {
+                              "name": "Logout",
+                              "request": {
+                                    "auth": {
+                                          "type": "bearer",
+                                          "bearer": [
+                                                {
+                                                      "key": "token",
+                                                      "value": "{{accessToken}}",
+                                                      "type": "string"
+                                                }
+                                          ]
+                                    },
+                                    "method": "POST",
+                                    "header": [],
+                                    "url": {
+                                          "raw": "{{baseUrl}}/auth/logout",
+                                          "host": [
+                                                "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                                "auth",
+                                                "logout"
+                                          ]
+                                    },
+                                    "description": "Logout current user (requires authentication)"
+                              },
+                              "response": []
+                        }
+                  ]
+            }
+      ],
+      "variable": [
+            {
+                  "key": "baseUrl",
+                  "value": "http://localhost:3000",
+                  "type": "string"
+            },
+            {
+                  "key": "accessToken",
+                  "value": "",
+                  "type": "string"
+            }
+      ]
+}
