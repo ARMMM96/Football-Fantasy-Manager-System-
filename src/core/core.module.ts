@@ -5,6 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 import config from '../config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TransformResponseInterceptor } from './interceptors/transform-response/transform-response.interceptor';
+import { CacheService } from './cache/cache.service';
+
 @Global()
 @Module({
   imports: [
@@ -17,7 +19,8 @@ import { TransformResponseInterceptor } from './interceptors/transform-response/
       useClass: TransformResponseInterceptor,
     },
     LoggerService,
+    CacheService,
   ],
-  exports: [DatabaseModule, LoggerService],
+  exports: [DatabaseModule, LoggerService, CacheService],
 })
 export class CoreModule {}
