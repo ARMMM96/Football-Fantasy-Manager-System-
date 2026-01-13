@@ -12,6 +12,7 @@ import {
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
+import { ConnectDto } from './dto/connect.dto';
 import { JwtAuthGuard } from '../../core/auth/auth.guard';
 
 @Controller('auth')
@@ -19,8 +20,19 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   /**
+   * POST /auth/connect
+   * Single-flow: Login if user exists, Register if new
+   * (Primary endpoint as per requirements)
+   */
+  @Post('connect')
+  @HttpCode(HttpStatus.OK)
+  async connect(@Body() connectDto: ConnectDto, @Ip() ipAddress: string) {
+    return this.authService.connect(connectDto, ipAddress);
+  }
+
+  /**
    * POST /auth/register
-   * Register a new user
+   * Register a new user (legacy, kept for compatibility)
    */
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
@@ -30,7 +42,7 @@ export class AuthController {
 
   /**
    * POST /auth/login
-   * Login existing user
+   * Login existing user (legacy, kept for compatibility)
    */
   @Post('login')
   @HttpCode(HttpStatus.OK)

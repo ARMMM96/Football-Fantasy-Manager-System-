@@ -1,98 +1,100 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Football Online Manager System
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A NestJS-based backend for a Football Fantasy Manager system, allowing users to manage teams, transfer players, and more.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Architecture & Workflow Diagrams
 
-## Description
+### 1. System Overview & Technical Stack
+![System Overview](./diagrams/diagram-export-1-12-2026-3_30_49-AM.png)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Project setup
+### 2. User Authentication & Team Generation Flow
+![Auth & Team Flow](./diagrams/diagram-export-1-12-2026-3_36_47-AM.png)
 
-```bash
-$ pnpm install
-```
+### 3. Database Entity Relationship Diagram (ERD)
+![Database ERD](./diagrams/diagram-export-1-12-2026-3_34_38-AM.png)
 
-## Compile and run the project
 
-```bash
-# development
-$ pnpm run start
 
-# watch mode
-$ pnpm run start:dev
 
-# production mode
-$ pnpm run start:prod
-```
 
-## Run tests
+## Features
 
-```bash
-# unit tests
-$ pnpm run test
+- **Authentication**: JWT-based auth with single-flow entry (`/auth/connect`).
+- **Team Management**: Async team creation with BullMQ (Redis). Generates 20 players per team ($5M budget).
+- **Transfer Market**:
+  - List players with filters (Team, Player, Price).
+  - Buy players (Atomic transactions, 95% value transfer).
+  - Team constraints (Max 25, Min 15 players).
+- **Architecture**: Modular NestJS structure with Prisma ORM.
 
-# e2e tests
-$ pnpm run test:e2e
+## Setup Instructions
 
-# test coverage
-$ pnpm run test:cov
-```
+### Prerequisites
+- Node.js (v18+)
+- PostgreSQL
+- Redis (for Queue)
+- pnpm (recommended) or npm
 
-## Deployment
+### Installation
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+1. **Clone & Install**
+   ```bash
+   git clone <repo-url>
+   cd football-manager-api
+   pnpm install
+   ```
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+2. **Database Setup**
+   Update `.env` with your DB credentials:
+   ```env
+   DATABASE_URL="postgresql://user:password@localhost:5432/football_db"
+   REDIS_HOST="localhost"
+   REDIS_PORT=6379
+   JWT_SECRET="super-secret"
+   ```
 
-```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
-```
+   Run migrations & seed:
+   ```bash
+   pnpm prisma migrate dev
+   pnpm prisma generate
+   pnpm prisma db seed
+   ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+3. **Running the App**
+   ```bash
+   # Start Redis server first!
+   pnpm start:dev
+   ```
 
-## Resources
+4. **Testing**
+   ```bash
+   pnpm test
+   ```
 
-Check out a few resources that may come in handy when working with NestJS:
+## API Documentation
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Import the provided `Football-Manager.postman_collection.json` into Postman for full API examples.
 
-## Support
+### Key Endpoints
+- `POST /auth/connect` - Login or Register (Single Flow)
+- `GET /transfers` - List market players
+- `POST /transfers/buy` - Buy a player
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Time Report
 
-## Stay in touch
+| Section | Time Spent | Details |
+| :--- | :--- | :--- |
+| **Analysis & Setup** | 1h 30m | Requirement analysis, project scaffolding, DB design. |
+| **Auth Module** | 2h 00m | implementation of JWT, Login/Register DTOs, Single-flow refactor. |
+| **Team Module** | 2h 30m | BullMQ setup, Async processor for team generation, "Seed" data constants. |
+| **Transfer Market** | 2h 00m | Transfer logic, atomic transactions, unit tests. |
+| **Debugging & Polish** | 1h 30m | Fixing Prisma import paths, RxJS conflicts, docs. |
+| **Total** | **9h 30m** | |
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## Tech Stack
+- **Framework**: NestJS
+- **Language**: TypeScript
+- **Database**: PostgreSQL (Prisma ORM)
+- **Queue**: BullMQ (Redis)
+- **Testing**: Jest

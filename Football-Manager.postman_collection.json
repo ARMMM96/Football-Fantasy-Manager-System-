@@ -1,0 +1,203 @@
+{
+      "info": {
+            "_postman_id": "8b3f1c50-1234-4567-8901-abcdef123456",
+            "name": "Football Manager API",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+      },
+      "item": [
+            {
+                  "name": "Auth",
+                  "item": [
+                        {
+                              "name": "Connect (Register/Login)",
+                              "event": [
+                                    {
+                                          "listen": "test",
+                                          "script": {
+                                                "exec": [
+                                                      "if(pm.response.code === 200 || pm.response.code === 201) {",
+                                                      "    var jsonData = pm.response.json();",
+                                                      "    pm.environment.set(\"accessToken\", jsonData.accessToken);",
+                                                      "}"
+                                                ],
+                                                "type": "text/javascript"
+                                          }
+                                    }
+                              ],
+                              "request": {
+                                    "method": "POST",
+                                    "header": [],
+                                    "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n    \"email\": \"manager@football.com\",\n    \"password\": \"User@123\"\n}",
+                                          "options": {
+                                                "raw": {
+                                                      "language": "json"
+                                                }
+                                          }
+                                    },
+                                    "url": {
+                                          "raw": "{{baseUrl}}/auth/connect",
+                                          "host": [
+                                                "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                                "auth",
+                                                "connect"
+                                          ]
+                                    }
+                              },
+                              "response": []
+                        },
+                        {
+                              "name": "Get Profile",
+                              "request": {
+                                    "method": "GET",
+                                    "header": [
+                                          {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{accessToken}}",
+                                                "type": "text"
+                                          }
+                                    ],
+                                    "url": {
+                                          "raw": "{{baseUrl}}/auth/profile",
+                                          "host": [
+                                                "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                                "auth",
+                                                "profile"
+                                          ]
+                                    }
+                              },
+                              "response": []
+                        }
+                  ]
+            },
+            {
+                  "name": "Transfers",
+                  "item": [
+                        {
+                              "name": "List Transfers (Filter)",
+                              "request": {
+                                    "method": "GET",
+                                    "header": [
+                                          {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{accessToken}}",
+                                                "type": "text"
+                                          }
+                                    ],
+                                    "url": {
+                                          "raw": "{{baseUrl}}/transfers?maxPrice=10000000",
+                                          "host": [
+                                                "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                                "transfers"
+                                          ],
+                                          "query": [
+                                                {
+                                                      "key": "maxPrice",
+                                                      "value": "10000000"
+                                                },
+                                                {
+                                                      "key": "playerName",
+                                                      "value": "",
+                                                      "disabled": true
+                                                }
+                                          ]
+                                    }
+                              },
+                              "response": []
+                        },
+                        {
+                              "name": "Add to Transfer List",
+                              "request": {
+                                    "method": "POST",
+                                    "header": [
+                                          {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{accessToken}}",
+                                                "type": "text"
+                                          }
+                                    ],
+                                    "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n    \"askingPrice\": 1500000\n}",
+                                          "options": {
+                                                "raw": {
+                                                      "language": "json"
+                                                }
+                                          }
+                                    },
+                                    "url": {
+                                          "raw": "{{baseUrl}}/transfers/list/:playerId",
+                                          "host": [
+                                                "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                                "transfers",
+                                                "list",
+                                                ":playerId"
+                                          ],
+                                          "variable": [
+                                                {
+                                                      "key": "playerId",
+                                                      "value": "REPLACE_WITH_UUID"
+                                                }
+                                          ]
+                                    }
+                              },
+                              "response": []
+                        },
+                        {
+                              "name": "Buy Player",
+                              "request": {
+                                    "method": "POST",
+                                    "header": [
+                                          {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{accessToken}}",
+                                                "type": "text"
+                                          }
+                                    ],
+                                    "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n    \"playerId\": \"REPLACE_WITH_UUID\"\n}",
+                                          "options": {
+                                                "raw": {
+                                                      "language": "json"
+                                                }
+                                          }
+                                    },
+                                    "url": {
+                                          "raw": "{{baseUrl}}/transfers/buy",
+                                          "host": [
+                                                "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                                "transfers",
+                                                "buy"
+                                          ]
+                                    }
+                              },
+                              "response": []
+                        }
+                  ]
+            }
+      ],
+      "variable": [
+            {
+                  "key": "baseUrl",
+                  "value": "http://localhost:3000",
+                  "type": "string"
+            },
+            {
+                  "key": "accessToken",
+                  "value": "",
+                  "type": "string"
+            }
+      ]
+}

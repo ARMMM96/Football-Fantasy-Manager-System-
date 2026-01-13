@@ -6,18 +6,47 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { DatabaseService } from '../../database/database.service';
+import { TeamsService } from '../teams/teams.service';
 import * as bcrypt from 'bcrypt';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
+import { ConnectDto } from './dto/connect.dto';
 import { AuthResponseDto } from './dto/auth-response.dto';
-import { User } from '@prisma/client';
+import { User } from '../../database/generated/prisma/client';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly jwtService: JwtService,
+    private readonly teamsService: TeamsService,
   ) {}
+
+  /**
+   * Unified Auth Flow - Single endpoint for login/register
+   * - If user exists: login
+   * - If user doesn't exist: register
+   */
+  async connect(
+    dto: ConnectDto,
+    ipAddress?: string,
+  ): Promise<AuthResponseDto> {
+    const { email, password } = dto;
+
+    // Check if user exists
+    const existingUser = await this.databaseService.client.user.findUnique({
+      where: { email: email.toLowerCase() },
+      include: { role: true },
+    });
+
+    if (existingUser) {
+      // User exists - perform login
+      return this.login(existingUser, password, ipAddress);
+    } else {
+      // User doesn't exist - perform registration
+      return this.register(dto as RegisterDto, ipAddress);
+    }
+  }
 
   /**
    * Register new user - Public method
@@ -97,8 +126,8 @@ export class AuthService {
     // Create session
     await this.createSession(user.id, accessToken, ipAddress);
 
-    // TODO: Emit event to create team (handled by Bull queue in teams module)
-    // this.eventEmitter.emit('user.registered', { userId: user.id });
+    // Queue async team creation
+    await this.teamsService.queueTeamCreation(user.id);
 
     return {
       accessToken,
