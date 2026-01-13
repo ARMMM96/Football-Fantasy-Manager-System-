@@ -48,20 +48,25 @@ export type Role = Prisma.RoleModel
  */
 export type User = Prisma.UserModel
 /**
+ * Model Session
+ * 
+ */
+export type Session = Prisma.SessionModel
+/**
  * Model Team
  * 
  */
 export type Team = Prisma.TeamModel
 /**
+ * Model TeamFinance
+ * 
+ */
+export type TeamFinance = Prisma.TeamFinanceModel
+/**
  * Model Player
  * 
  */
 export type Player = Prisma.PlayerModel
-/**
- * Model Session
- * 
- */
-export type Session = Prisma.SessionModel
 /**
  * Model TransferListing
  * 
@@ -72,11 +77,6 @@ export type TransferListing = Prisma.TransferListingModel
  * 
  */
 export type TransferTransaction = Prisma.TransferTransactionModel
-/**
- * Model TeamFinance
- * 
- */
-export type TeamFinance = Prisma.TeamFinanceModel
 /**
  * Model AuditLog
  * 

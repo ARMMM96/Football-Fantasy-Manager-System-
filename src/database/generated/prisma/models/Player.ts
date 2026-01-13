@@ -234,7 +234,7 @@ export type PlayerGroupByOutputType = {
   teamId: string
   firstName: string
   lastName: string
-  nationality: string | null
+  nationality: string
   position: string
   marketValue: runtime.Decimal
   age: number
@@ -268,11 +268,11 @@ export type PlayerWhereInput = {
   AND?: Prisma.PlayerWhereInput | Prisma.PlayerWhereInput[]
   OR?: Prisma.PlayerWhereInput[]
   NOT?: Prisma.PlayerWhereInput | Prisma.PlayerWhereInput[]
-  id?: Prisma.StringFilter<"Player"> | string
-  teamId?: Prisma.StringFilter<"Player"> | string
+  id?: Prisma.UuidFilter<"Player"> | string
+  teamId?: Prisma.UuidFilter<"Player"> | string
   firstName?: Prisma.StringFilter<"Player"> | string
   lastName?: Prisma.StringFilter<"Player"> | string
-  nationality?: Prisma.StringNullableFilter<"Player"> | string | null
+  nationality?: Prisma.StringFilter<"Player"> | string
   position?: Prisma.StringFilter<"Player"> | string
   marketValue?: Prisma.DecimalFilter<"Player"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   age?: Prisma.IntFilter<"Player"> | number
@@ -282,7 +282,7 @@ export type PlayerWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Player"> | Date | string
   team?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
   transferListing?: Prisma.XOR<Prisma.TransferListingNullableScalarRelationFilter, Prisma.TransferListingWhereInput> | null
-  transactions?: Prisma.TransferTransactionListRelationFilter
+  transferTransactions?: Prisma.TransferTransactionListRelationFilter
 }
 
 export type PlayerOrderByWithRelationInput = {
@@ -290,7 +290,7 @@ export type PlayerOrderByWithRelationInput = {
   teamId?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
-  nationality?: Prisma.SortOrderInput | Prisma.SortOrder
+  nationality?: Prisma.SortOrder
   position?: Prisma.SortOrder
   marketValue?: Prisma.SortOrder
   age?: Prisma.SortOrder
@@ -300,7 +300,7 @@ export type PlayerOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   team?: Prisma.TeamOrderByWithRelationInput
   transferListing?: Prisma.TransferListingOrderByWithRelationInput
-  transactions?: Prisma.TransferTransactionOrderByRelationAggregateInput
+  transferTransactions?: Prisma.TransferTransactionOrderByRelationAggregateInput
 }
 
 export type PlayerWhereUniqueInput = Prisma.AtLeast<{
@@ -308,10 +308,10 @@ export type PlayerWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.PlayerWhereInput | Prisma.PlayerWhereInput[]
   OR?: Prisma.PlayerWhereInput[]
   NOT?: Prisma.PlayerWhereInput | Prisma.PlayerWhereInput[]
-  teamId?: Prisma.StringFilter<"Player"> | string
+  teamId?: Prisma.UuidFilter<"Player"> | string
   firstName?: Prisma.StringFilter<"Player"> | string
   lastName?: Prisma.StringFilter<"Player"> | string
-  nationality?: Prisma.StringNullableFilter<"Player"> | string | null
+  nationality?: Prisma.StringFilter<"Player"> | string
   position?: Prisma.StringFilter<"Player"> | string
   marketValue?: Prisma.DecimalFilter<"Player"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   age?: Prisma.IntFilter<"Player"> | number
@@ -321,7 +321,7 @@ export type PlayerWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Player"> | Date | string
   team?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
   transferListing?: Prisma.XOR<Prisma.TransferListingNullableScalarRelationFilter, Prisma.TransferListingWhereInput> | null
-  transactions?: Prisma.TransferTransactionListRelationFilter
+  transferTransactions?: Prisma.TransferTransactionListRelationFilter
 }, "id">
 
 export type PlayerOrderByWithAggregationInput = {
@@ -329,7 +329,7 @@ export type PlayerOrderByWithAggregationInput = {
   teamId?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
-  nationality?: Prisma.SortOrderInput | Prisma.SortOrder
+  nationality?: Prisma.SortOrder
   position?: Prisma.SortOrder
   marketValue?: Prisma.SortOrder
   age?: Prisma.SortOrder
@@ -348,11 +348,11 @@ export type PlayerScalarWhereWithAggregatesInput = {
   AND?: Prisma.PlayerScalarWhereWithAggregatesInput | Prisma.PlayerScalarWhereWithAggregatesInput[]
   OR?: Prisma.PlayerScalarWhereWithAggregatesInput[]
   NOT?: Prisma.PlayerScalarWhereWithAggregatesInput | Prisma.PlayerScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Player"> | string
-  teamId?: Prisma.StringWithAggregatesFilter<"Player"> | string
+  id?: Prisma.UuidWithAggregatesFilter<"Player"> | string
+  teamId?: Prisma.UuidWithAggregatesFilter<"Player"> | string
   firstName?: Prisma.StringWithAggregatesFilter<"Player"> | string
   lastName?: Prisma.StringWithAggregatesFilter<"Player"> | string
-  nationality?: Prisma.StringNullableWithAggregatesFilter<"Player"> | string | null
+  nationality?: Prisma.StringWithAggregatesFilter<"Player"> | string
   position?: Prisma.StringWithAggregatesFilter<"Player"> | string
   marketValue?: Prisma.DecimalWithAggregatesFilter<"Player"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   age?: Prisma.IntWithAggregatesFilter<"Player"> | number
@@ -366,7 +366,7 @@ export type PlayerCreateInput = {
   id?: string
   firstName: string
   lastName: string
-  nationality?: string | null
+  nationality?: string
   position: string
   marketValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   age: number
@@ -376,7 +376,7 @@ export type PlayerCreateInput = {
   updatedAt?: Date | string
   team: Prisma.TeamCreateNestedOneWithoutPlayersInput
   transferListing?: Prisma.TransferListingCreateNestedOneWithoutPlayerInput
-  transactions?: Prisma.TransferTransactionCreateNestedManyWithoutPlayerInput
+  transferTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateInput = {
@@ -384,7 +384,7 @@ export type PlayerUncheckedCreateInput = {
   teamId: string
   firstName: string
   lastName: string
-  nationality?: string | null
+  nationality?: string
   position: string
   marketValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   age: number
@@ -393,14 +393,14 @@ export type PlayerUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   transferListing?: Prisma.TransferListingUncheckedCreateNestedOneWithoutPlayerInput
-  transactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutPlayerInput
+  transferTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationality?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.StringFieldUpdateOperationsInput | string
   marketValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   age?: Prisma.IntFieldUpdateOperationsInput | number
@@ -410,7 +410,7 @@ export type PlayerUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   team?: Prisma.TeamUpdateOneRequiredWithoutPlayersNestedInput
   transferListing?: Prisma.TransferListingUpdateOneWithoutPlayerNestedInput
-  transactions?: Prisma.TransferTransactionUpdateManyWithoutPlayerNestedInput
+  transferTransactions?: Prisma.TransferTransactionUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateInput = {
@@ -418,7 +418,7 @@ export type PlayerUncheckedUpdateInput = {
   teamId?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationality?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.StringFieldUpdateOperationsInput | string
   marketValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   age?: Prisma.IntFieldUpdateOperationsInput | number
@@ -427,7 +427,7 @@ export type PlayerUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transferListing?: Prisma.TransferListingUncheckedUpdateOneWithoutPlayerNestedInput
-  transactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutPlayerNestedInput
+  transferTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerCreateManyInput = {
@@ -435,7 +435,7 @@ export type PlayerCreateManyInput = {
   teamId: string
   firstName: string
   lastName: string
-  nationality?: string | null
+  nationality?: string
   position: string
   marketValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   age: number
@@ -449,7 +449,7 @@ export type PlayerUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationality?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.StringFieldUpdateOperationsInput | string
   marketValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   age?: Prisma.IntFieldUpdateOperationsInput | number
@@ -464,7 +464,7 @@ export type PlayerUncheckedUpdateManyInput = {
   teamId?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationality?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.StringFieldUpdateOperationsInput | string
   marketValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   age?: Prisma.IntFieldUpdateOperationsInput | number
@@ -610,25 +610,25 @@ export type PlayerUpdateOneRequiredWithoutTransferListingNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PlayerUpdateToOneWithWhereWithoutTransferListingInput, Prisma.PlayerUpdateWithoutTransferListingInput>, Prisma.PlayerUncheckedUpdateWithoutTransferListingInput>
 }
 
-export type PlayerCreateNestedOneWithoutTransactionsInput = {
-  create?: Prisma.XOR<Prisma.PlayerCreateWithoutTransactionsInput, Prisma.PlayerUncheckedCreateWithoutTransactionsInput>
-  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutTransactionsInput
+export type PlayerCreateNestedOneWithoutTransferTransactionsInput = {
+  create?: Prisma.XOR<Prisma.PlayerCreateWithoutTransferTransactionsInput, Prisma.PlayerUncheckedCreateWithoutTransferTransactionsInput>
+  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutTransferTransactionsInput
   connect?: Prisma.PlayerWhereUniqueInput
 }
 
-export type PlayerUpdateOneRequiredWithoutTransactionsNestedInput = {
-  create?: Prisma.XOR<Prisma.PlayerCreateWithoutTransactionsInput, Prisma.PlayerUncheckedCreateWithoutTransactionsInput>
-  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutTransactionsInput
-  upsert?: Prisma.PlayerUpsertWithoutTransactionsInput
+export type PlayerUpdateOneRequiredWithoutTransferTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.PlayerCreateWithoutTransferTransactionsInput, Prisma.PlayerUncheckedCreateWithoutTransferTransactionsInput>
+  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutTransferTransactionsInput
+  upsert?: Prisma.PlayerUpsertWithoutTransferTransactionsInput
   connect?: Prisma.PlayerWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PlayerUpdateToOneWithWhereWithoutTransactionsInput, Prisma.PlayerUpdateWithoutTransactionsInput>, Prisma.PlayerUncheckedUpdateWithoutTransactionsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PlayerUpdateToOneWithWhereWithoutTransferTransactionsInput, Prisma.PlayerUpdateWithoutTransferTransactionsInput>, Prisma.PlayerUncheckedUpdateWithoutTransferTransactionsInput>
 }
 
 export type PlayerCreateWithoutTeamInput = {
   id?: string
   firstName: string
   lastName: string
-  nationality?: string | null
+  nationality?: string
   position: string
   marketValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   age: number
@@ -637,14 +637,14 @@ export type PlayerCreateWithoutTeamInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   transferListing?: Prisma.TransferListingCreateNestedOneWithoutPlayerInput
-  transactions?: Prisma.TransferTransactionCreateNestedManyWithoutPlayerInput
+  transferTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutTeamInput = {
   id?: string
   firstName: string
   lastName: string
-  nationality?: string | null
+  nationality?: string
   position: string
   marketValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   age: number
@@ -653,7 +653,7 @@ export type PlayerUncheckedCreateWithoutTeamInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   transferListing?: Prisma.TransferListingUncheckedCreateNestedOneWithoutPlayerInput
-  transactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutPlayerInput
+  transferTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutTeamInput = {
@@ -686,11 +686,11 @@ export type PlayerScalarWhereInput = {
   AND?: Prisma.PlayerScalarWhereInput | Prisma.PlayerScalarWhereInput[]
   OR?: Prisma.PlayerScalarWhereInput[]
   NOT?: Prisma.PlayerScalarWhereInput | Prisma.PlayerScalarWhereInput[]
-  id?: Prisma.StringFilter<"Player"> | string
-  teamId?: Prisma.StringFilter<"Player"> | string
+  id?: Prisma.UuidFilter<"Player"> | string
+  teamId?: Prisma.UuidFilter<"Player"> | string
   firstName?: Prisma.StringFilter<"Player"> | string
   lastName?: Prisma.StringFilter<"Player"> | string
-  nationality?: Prisma.StringNullableFilter<"Player"> | string | null
+  nationality?: Prisma.StringFilter<"Player"> | string
   position?: Prisma.StringFilter<"Player"> | string
   marketValue?: Prisma.DecimalFilter<"Player"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   age?: Prisma.IntFilter<"Player"> | number
@@ -704,7 +704,7 @@ export type PlayerCreateWithoutTransferListingInput = {
   id?: string
   firstName: string
   lastName: string
-  nationality?: string | null
+  nationality?: string
   position: string
   marketValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   age: number
@@ -713,7 +713,7 @@ export type PlayerCreateWithoutTransferListingInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   team: Prisma.TeamCreateNestedOneWithoutPlayersInput
-  transactions?: Prisma.TransferTransactionCreateNestedManyWithoutPlayerInput
+  transferTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutTransferListingInput = {
@@ -721,7 +721,7 @@ export type PlayerUncheckedCreateWithoutTransferListingInput = {
   teamId: string
   firstName: string
   lastName: string
-  nationality?: string | null
+  nationality?: string
   position: string
   marketValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   age: number
@@ -729,7 +729,7 @@ export type PlayerUncheckedCreateWithoutTransferListingInput = {
   askingPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  transactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutPlayerInput
+  transferTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutTransferListingInput = {
@@ -752,7 +752,7 @@ export type PlayerUpdateWithoutTransferListingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationality?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.StringFieldUpdateOperationsInput | string
   marketValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   age?: Prisma.IntFieldUpdateOperationsInput | number
@@ -761,7 +761,7 @@ export type PlayerUpdateWithoutTransferListingInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   team?: Prisma.TeamUpdateOneRequiredWithoutPlayersNestedInput
-  transactions?: Prisma.TransferTransactionUpdateManyWithoutPlayerNestedInput
+  transferTransactions?: Prisma.TransferTransactionUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutTransferListingInput = {
@@ -769,7 +769,7 @@ export type PlayerUncheckedUpdateWithoutTransferListingInput = {
   teamId?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationality?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.StringFieldUpdateOperationsInput | string
   marketValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   age?: Prisma.IntFieldUpdateOperationsInput | number
@@ -777,14 +777,14 @@ export type PlayerUncheckedUpdateWithoutTransferListingInput = {
   askingPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  transactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutPlayerNestedInput
+  transferTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
-export type PlayerCreateWithoutTransactionsInput = {
+export type PlayerCreateWithoutTransferTransactionsInput = {
   id?: string
   firstName: string
   lastName: string
-  nationality?: string | null
+  nationality?: string
   position: string
   marketValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   age: number
@@ -796,12 +796,12 @@ export type PlayerCreateWithoutTransactionsInput = {
   transferListing?: Prisma.TransferListingCreateNestedOneWithoutPlayerInput
 }
 
-export type PlayerUncheckedCreateWithoutTransactionsInput = {
+export type PlayerUncheckedCreateWithoutTransferTransactionsInput = {
   id?: string
   teamId: string
   firstName: string
   lastName: string
-  nationality?: string | null
+  nationality?: string
   position: string
   marketValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   age: number
@@ -812,27 +812,27 @@ export type PlayerUncheckedCreateWithoutTransactionsInput = {
   transferListing?: Prisma.TransferListingUncheckedCreateNestedOneWithoutPlayerInput
 }
 
-export type PlayerCreateOrConnectWithoutTransactionsInput = {
+export type PlayerCreateOrConnectWithoutTransferTransactionsInput = {
   where: Prisma.PlayerWhereUniqueInput
-  create: Prisma.XOR<Prisma.PlayerCreateWithoutTransactionsInput, Prisma.PlayerUncheckedCreateWithoutTransactionsInput>
+  create: Prisma.XOR<Prisma.PlayerCreateWithoutTransferTransactionsInput, Prisma.PlayerUncheckedCreateWithoutTransferTransactionsInput>
 }
 
-export type PlayerUpsertWithoutTransactionsInput = {
-  update: Prisma.XOR<Prisma.PlayerUpdateWithoutTransactionsInput, Prisma.PlayerUncheckedUpdateWithoutTransactionsInput>
-  create: Prisma.XOR<Prisma.PlayerCreateWithoutTransactionsInput, Prisma.PlayerUncheckedCreateWithoutTransactionsInput>
+export type PlayerUpsertWithoutTransferTransactionsInput = {
+  update: Prisma.XOR<Prisma.PlayerUpdateWithoutTransferTransactionsInput, Prisma.PlayerUncheckedUpdateWithoutTransferTransactionsInput>
+  create: Prisma.XOR<Prisma.PlayerCreateWithoutTransferTransactionsInput, Prisma.PlayerUncheckedCreateWithoutTransferTransactionsInput>
   where?: Prisma.PlayerWhereInput
 }
 
-export type PlayerUpdateToOneWithWhereWithoutTransactionsInput = {
+export type PlayerUpdateToOneWithWhereWithoutTransferTransactionsInput = {
   where?: Prisma.PlayerWhereInput
-  data: Prisma.XOR<Prisma.PlayerUpdateWithoutTransactionsInput, Prisma.PlayerUncheckedUpdateWithoutTransactionsInput>
+  data: Prisma.XOR<Prisma.PlayerUpdateWithoutTransferTransactionsInput, Prisma.PlayerUncheckedUpdateWithoutTransferTransactionsInput>
 }
 
-export type PlayerUpdateWithoutTransactionsInput = {
+export type PlayerUpdateWithoutTransferTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationality?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.StringFieldUpdateOperationsInput | string
   marketValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   age?: Prisma.IntFieldUpdateOperationsInput | number
@@ -844,12 +844,12 @@ export type PlayerUpdateWithoutTransactionsInput = {
   transferListing?: Prisma.TransferListingUpdateOneWithoutPlayerNestedInput
 }
 
-export type PlayerUncheckedUpdateWithoutTransactionsInput = {
+export type PlayerUncheckedUpdateWithoutTransferTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   teamId?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationality?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.StringFieldUpdateOperationsInput | string
   marketValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   age?: Prisma.IntFieldUpdateOperationsInput | number
@@ -864,7 +864,7 @@ export type PlayerCreateManyTeamInput = {
   id?: string
   firstName: string
   lastName: string
-  nationality?: string | null
+  nationality?: string
   position: string
   marketValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   age: number
@@ -878,7 +878,7 @@ export type PlayerUpdateWithoutTeamInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationality?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.StringFieldUpdateOperationsInput | string
   marketValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   age?: Prisma.IntFieldUpdateOperationsInput | number
@@ -887,14 +887,14 @@ export type PlayerUpdateWithoutTeamInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transferListing?: Prisma.TransferListingUpdateOneWithoutPlayerNestedInput
-  transactions?: Prisma.TransferTransactionUpdateManyWithoutPlayerNestedInput
+  transferTransactions?: Prisma.TransferTransactionUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutTeamInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationality?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.StringFieldUpdateOperationsInput | string
   marketValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   age?: Prisma.IntFieldUpdateOperationsInput | number
@@ -903,14 +903,14 @@ export type PlayerUncheckedUpdateWithoutTeamInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transferListing?: Prisma.TransferListingUncheckedUpdateOneWithoutPlayerNestedInput
-  transactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutPlayerNestedInput
+  transferTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateManyWithoutTeamInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationality?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.StringFieldUpdateOperationsInput | string
   marketValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   age?: Prisma.IntFieldUpdateOperationsInput | number
@@ -926,11 +926,11 @@ export type PlayerUncheckedUpdateManyWithoutTeamInput = {
  */
 
 export type PlayerCountOutputType = {
-  transactions: number
+  transferTransactions: number
 }
 
 export type PlayerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  transactions?: boolean | PlayerCountOutputTypeCountTransactionsArgs
+  transferTransactions?: boolean | PlayerCountOutputTypeCountTransferTransactionsArgs
 }
 
 /**
@@ -946,7 +946,7 @@ export type PlayerCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
 /**
  * PlayerCountOutputType without action
  */
-export type PlayerCountOutputTypeCountTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type PlayerCountOutputTypeCountTransferTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TransferTransactionWhereInput
 }
 
@@ -966,7 +966,7 @@ export type PlayerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   updatedAt?: boolean
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
   transferListing?: boolean | Prisma.Player$transferListingArgs<ExtArgs>
-  transactions?: boolean | Prisma.Player$transactionsArgs<ExtArgs>
+  transferTransactions?: boolean | Prisma.Player$transferTransactionsArgs<ExtArgs>
   _count?: boolean | Prisma.PlayerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["player"]>
 
@@ -1021,7 +1021,7 @@ export type PlayerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type PlayerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
   transferListing?: boolean | Prisma.Player$transferListingArgs<ExtArgs>
-  transactions?: boolean | Prisma.Player$transactionsArgs<ExtArgs>
+  transferTransactions?: boolean | Prisma.Player$transferTransactionsArgs<ExtArgs>
   _count?: boolean | Prisma.PlayerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PlayerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1036,14 +1036,14 @@ export type $PlayerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     team: Prisma.$TeamPayload<ExtArgs>
     transferListing: Prisma.$TransferListingPayload<ExtArgs> | null
-    transactions: Prisma.$TransferTransactionPayload<ExtArgs>[]
+    transferTransactions: Prisma.$TransferTransactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     teamId: string
     firstName: string
     lastName: string
-    nationality: string | null
+    nationality: string
     position: string
     marketValue: runtime.Decimal
     age: number
@@ -1447,7 +1447,7 @@ export interface Prisma__PlayerClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   team<T extends Prisma.TeamDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TeamDefaultArgs<ExtArgs>>): Prisma.Prisma__TeamClient<runtime.Types.Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   transferListing<T extends Prisma.Player$transferListingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Player$transferListingArgs<ExtArgs>>): Prisma.Prisma__TransferListingClient<runtime.Types.Result.GetResult<Prisma.$TransferListingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  transactions<T extends Prisma.Player$transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Player$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransferTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  transferTransactions<T extends Prisma.Player$transferTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Player$transferTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransferTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1904,9 +1904,9 @@ export type Player$transferListingArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
- * Player.transactions
+ * Player.transferTransactions
  */
-export type Player$transactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Player$transferTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the TransferTransaction
    */

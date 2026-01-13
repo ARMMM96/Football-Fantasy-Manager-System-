@@ -236,16 +236,15 @@ export type TeamFinanceWhereInput = {
   AND?: Prisma.TeamFinanceWhereInput | Prisma.TeamFinanceWhereInput[]
   OR?: Prisma.TeamFinanceWhereInput[]
   NOT?: Prisma.TeamFinanceWhereInput | Prisma.TeamFinanceWhereInput[]
-  id?: Prisma.StringFilter<"TeamFinance"> | string
-  teamId?: Prisma.StringFilter<"TeamFinance"> | string
+  id?: Prisma.UuidFilter<"TeamFinance"> | string
+  teamId?: Prisma.UuidFilter<"TeamFinance"> | string
   transactionType?: Prisma.StringFilter<"TeamFinance"> | string
   amount?: Prisma.DecimalFilter<"TeamFinance"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   balanceAfter?: Prisma.DecimalFilter<"TeamFinance"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: Prisma.StringNullableFilter<"TeamFinance"> | string | null
-  referenceTransactionId?: Prisma.StringNullableFilter<"TeamFinance"> | string | null
+  referenceTransactionId?: Prisma.UuidNullableFilter<"TeamFinance"> | string | null
   transactionDate?: Prisma.DateTimeFilter<"TeamFinance"> | Date | string
   team?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
-  referenceTransaction?: Prisma.XOR<Prisma.TransferTransactionNullableScalarRelationFilter, Prisma.TransferTransactionWhereInput> | null
 }
 
 export type TeamFinanceOrderByWithRelationInput = {
@@ -258,7 +257,6 @@ export type TeamFinanceOrderByWithRelationInput = {
   referenceTransactionId?: Prisma.SortOrderInput | Prisma.SortOrder
   transactionDate?: Prisma.SortOrder
   team?: Prisma.TeamOrderByWithRelationInput
-  referenceTransaction?: Prisma.TransferTransactionOrderByWithRelationInput
 }
 
 export type TeamFinanceWhereUniqueInput = Prisma.AtLeast<{
@@ -266,15 +264,14 @@ export type TeamFinanceWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.TeamFinanceWhereInput | Prisma.TeamFinanceWhereInput[]
   OR?: Prisma.TeamFinanceWhereInput[]
   NOT?: Prisma.TeamFinanceWhereInput | Prisma.TeamFinanceWhereInput[]
-  teamId?: Prisma.StringFilter<"TeamFinance"> | string
+  teamId?: Prisma.UuidFilter<"TeamFinance"> | string
   transactionType?: Prisma.StringFilter<"TeamFinance"> | string
   amount?: Prisma.DecimalFilter<"TeamFinance"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   balanceAfter?: Prisma.DecimalFilter<"TeamFinance"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: Prisma.StringNullableFilter<"TeamFinance"> | string | null
-  referenceTransactionId?: Prisma.StringNullableFilter<"TeamFinance"> | string | null
+  referenceTransactionId?: Prisma.UuidNullableFilter<"TeamFinance"> | string | null
   transactionDate?: Prisma.DateTimeFilter<"TeamFinance"> | Date | string
   team?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
-  referenceTransaction?: Prisma.XOR<Prisma.TransferTransactionNullableScalarRelationFilter, Prisma.TransferTransactionWhereInput> | null
 }, "id">
 
 export type TeamFinanceOrderByWithAggregationInput = {
@@ -297,13 +294,13 @@ export type TeamFinanceScalarWhereWithAggregatesInput = {
   AND?: Prisma.TeamFinanceScalarWhereWithAggregatesInput | Prisma.TeamFinanceScalarWhereWithAggregatesInput[]
   OR?: Prisma.TeamFinanceScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TeamFinanceScalarWhereWithAggregatesInput | Prisma.TeamFinanceScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"TeamFinance"> | string
-  teamId?: Prisma.StringWithAggregatesFilter<"TeamFinance"> | string
+  id?: Prisma.UuidWithAggregatesFilter<"TeamFinance"> | string
+  teamId?: Prisma.UuidWithAggregatesFilter<"TeamFinance"> | string
   transactionType?: Prisma.StringWithAggregatesFilter<"TeamFinance"> | string
   amount?: Prisma.DecimalWithAggregatesFilter<"TeamFinance"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   balanceAfter?: Prisma.DecimalWithAggregatesFilter<"TeamFinance"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: Prisma.StringNullableWithAggregatesFilter<"TeamFinance"> | string | null
-  referenceTransactionId?: Prisma.StringNullableWithAggregatesFilter<"TeamFinance"> | string | null
+  referenceTransactionId?: Prisma.UuidNullableWithAggregatesFilter<"TeamFinance"> | string | null
   transactionDate?: Prisma.DateTimeWithAggregatesFilter<"TeamFinance"> | Date | string
 }
 
@@ -313,9 +310,9 @@ export type TeamFinanceCreateInput = {
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   balanceAfter: runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: string | null
+  referenceTransactionId?: string | null
   transactionDate?: Date | string
-  team: Prisma.TeamCreateNestedOneWithoutFinancesInput
-  referenceTransaction?: Prisma.TransferTransactionCreateNestedOneWithoutFinancesInput
+  team: Prisma.TeamCreateNestedOneWithoutFinanceRecordsInput
 }
 
 export type TeamFinanceUncheckedCreateInput = {
@@ -335,9 +332,9 @@ export type TeamFinanceUpdateInput = {
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   balanceAfter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referenceTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  team?: Prisma.TeamUpdateOneRequiredWithoutFinancesNestedInput
-  referenceTransaction?: Prisma.TransferTransactionUpdateOneWithoutFinancesNestedInput
+  team?: Prisma.TeamUpdateOneRequiredWithoutFinanceRecordsNestedInput
 }
 
 export type TeamFinanceUncheckedUpdateInput = {
@@ -368,6 +365,7 @@ export type TeamFinanceUpdateManyMutationInput = {
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   balanceAfter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referenceTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -477,56 +475,14 @@ export type TeamFinanceUncheckedUpdateManyWithoutTeamNestedInput = {
   deleteMany?: Prisma.TeamFinanceScalarWhereInput | Prisma.TeamFinanceScalarWhereInput[]
 }
 
-export type TeamFinanceCreateNestedManyWithoutReferenceTransactionInput = {
-  create?: Prisma.XOR<Prisma.TeamFinanceCreateWithoutReferenceTransactionInput, Prisma.TeamFinanceUncheckedCreateWithoutReferenceTransactionInput> | Prisma.TeamFinanceCreateWithoutReferenceTransactionInput[] | Prisma.TeamFinanceUncheckedCreateWithoutReferenceTransactionInput[]
-  connectOrCreate?: Prisma.TeamFinanceCreateOrConnectWithoutReferenceTransactionInput | Prisma.TeamFinanceCreateOrConnectWithoutReferenceTransactionInput[]
-  createMany?: Prisma.TeamFinanceCreateManyReferenceTransactionInputEnvelope
-  connect?: Prisma.TeamFinanceWhereUniqueInput | Prisma.TeamFinanceWhereUniqueInput[]
-}
-
-export type TeamFinanceUncheckedCreateNestedManyWithoutReferenceTransactionInput = {
-  create?: Prisma.XOR<Prisma.TeamFinanceCreateWithoutReferenceTransactionInput, Prisma.TeamFinanceUncheckedCreateWithoutReferenceTransactionInput> | Prisma.TeamFinanceCreateWithoutReferenceTransactionInput[] | Prisma.TeamFinanceUncheckedCreateWithoutReferenceTransactionInput[]
-  connectOrCreate?: Prisma.TeamFinanceCreateOrConnectWithoutReferenceTransactionInput | Prisma.TeamFinanceCreateOrConnectWithoutReferenceTransactionInput[]
-  createMany?: Prisma.TeamFinanceCreateManyReferenceTransactionInputEnvelope
-  connect?: Prisma.TeamFinanceWhereUniqueInput | Prisma.TeamFinanceWhereUniqueInput[]
-}
-
-export type TeamFinanceUpdateManyWithoutReferenceTransactionNestedInput = {
-  create?: Prisma.XOR<Prisma.TeamFinanceCreateWithoutReferenceTransactionInput, Prisma.TeamFinanceUncheckedCreateWithoutReferenceTransactionInput> | Prisma.TeamFinanceCreateWithoutReferenceTransactionInput[] | Prisma.TeamFinanceUncheckedCreateWithoutReferenceTransactionInput[]
-  connectOrCreate?: Prisma.TeamFinanceCreateOrConnectWithoutReferenceTransactionInput | Prisma.TeamFinanceCreateOrConnectWithoutReferenceTransactionInput[]
-  upsert?: Prisma.TeamFinanceUpsertWithWhereUniqueWithoutReferenceTransactionInput | Prisma.TeamFinanceUpsertWithWhereUniqueWithoutReferenceTransactionInput[]
-  createMany?: Prisma.TeamFinanceCreateManyReferenceTransactionInputEnvelope
-  set?: Prisma.TeamFinanceWhereUniqueInput | Prisma.TeamFinanceWhereUniqueInput[]
-  disconnect?: Prisma.TeamFinanceWhereUniqueInput | Prisma.TeamFinanceWhereUniqueInput[]
-  delete?: Prisma.TeamFinanceWhereUniqueInput | Prisma.TeamFinanceWhereUniqueInput[]
-  connect?: Prisma.TeamFinanceWhereUniqueInput | Prisma.TeamFinanceWhereUniqueInput[]
-  update?: Prisma.TeamFinanceUpdateWithWhereUniqueWithoutReferenceTransactionInput | Prisma.TeamFinanceUpdateWithWhereUniqueWithoutReferenceTransactionInput[]
-  updateMany?: Prisma.TeamFinanceUpdateManyWithWhereWithoutReferenceTransactionInput | Prisma.TeamFinanceUpdateManyWithWhereWithoutReferenceTransactionInput[]
-  deleteMany?: Prisma.TeamFinanceScalarWhereInput | Prisma.TeamFinanceScalarWhereInput[]
-}
-
-export type TeamFinanceUncheckedUpdateManyWithoutReferenceTransactionNestedInput = {
-  create?: Prisma.XOR<Prisma.TeamFinanceCreateWithoutReferenceTransactionInput, Prisma.TeamFinanceUncheckedCreateWithoutReferenceTransactionInput> | Prisma.TeamFinanceCreateWithoutReferenceTransactionInput[] | Prisma.TeamFinanceUncheckedCreateWithoutReferenceTransactionInput[]
-  connectOrCreate?: Prisma.TeamFinanceCreateOrConnectWithoutReferenceTransactionInput | Prisma.TeamFinanceCreateOrConnectWithoutReferenceTransactionInput[]
-  upsert?: Prisma.TeamFinanceUpsertWithWhereUniqueWithoutReferenceTransactionInput | Prisma.TeamFinanceUpsertWithWhereUniqueWithoutReferenceTransactionInput[]
-  createMany?: Prisma.TeamFinanceCreateManyReferenceTransactionInputEnvelope
-  set?: Prisma.TeamFinanceWhereUniqueInput | Prisma.TeamFinanceWhereUniqueInput[]
-  disconnect?: Prisma.TeamFinanceWhereUniqueInput | Prisma.TeamFinanceWhereUniqueInput[]
-  delete?: Prisma.TeamFinanceWhereUniqueInput | Prisma.TeamFinanceWhereUniqueInput[]
-  connect?: Prisma.TeamFinanceWhereUniqueInput | Prisma.TeamFinanceWhereUniqueInput[]
-  update?: Prisma.TeamFinanceUpdateWithWhereUniqueWithoutReferenceTransactionInput | Prisma.TeamFinanceUpdateWithWhereUniqueWithoutReferenceTransactionInput[]
-  updateMany?: Prisma.TeamFinanceUpdateManyWithWhereWithoutReferenceTransactionInput | Prisma.TeamFinanceUpdateManyWithWhereWithoutReferenceTransactionInput[]
-  deleteMany?: Prisma.TeamFinanceScalarWhereInput | Prisma.TeamFinanceScalarWhereInput[]
-}
-
 export type TeamFinanceCreateWithoutTeamInput = {
   id?: string
   transactionType: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   balanceAfter: runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: string | null
+  referenceTransactionId?: string | null
   transactionDate?: Date | string
-  referenceTransaction?: Prisma.TransferTransactionCreateNestedOneWithoutFinancesInput
 }
 
 export type TeamFinanceUncheckedCreateWithoutTeamInput = {
@@ -569,60 +525,14 @@ export type TeamFinanceScalarWhereInput = {
   AND?: Prisma.TeamFinanceScalarWhereInput | Prisma.TeamFinanceScalarWhereInput[]
   OR?: Prisma.TeamFinanceScalarWhereInput[]
   NOT?: Prisma.TeamFinanceScalarWhereInput | Prisma.TeamFinanceScalarWhereInput[]
-  id?: Prisma.StringFilter<"TeamFinance"> | string
-  teamId?: Prisma.StringFilter<"TeamFinance"> | string
+  id?: Prisma.UuidFilter<"TeamFinance"> | string
+  teamId?: Prisma.UuidFilter<"TeamFinance"> | string
   transactionType?: Prisma.StringFilter<"TeamFinance"> | string
   amount?: Prisma.DecimalFilter<"TeamFinance"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   balanceAfter?: Prisma.DecimalFilter<"TeamFinance"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: Prisma.StringNullableFilter<"TeamFinance"> | string | null
-  referenceTransactionId?: Prisma.StringNullableFilter<"TeamFinance"> | string | null
+  referenceTransactionId?: Prisma.UuidNullableFilter<"TeamFinance"> | string | null
   transactionDate?: Prisma.DateTimeFilter<"TeamFinance"> | Date | string
-}
-
-export type TeamFinanceCreateWithoutReferenceTransactionInput = {
-  id?: string
-  transactionType: string
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balanceAfter: runtime.Decimal | runtime.DecimalJsLike | number | string
-  description?: string | null
-  transactionDate?: Date | string
-  team: Prisma.TeamCreateNestedOneWithoutFinancesInput
-}
-
-export type TeamFinanceUncheckedCreateWithoutReferenceTransactionInput = {
-  id?: string
-  teamId: string
-  transactionType: string
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balanceAfter: runtime.Decimal | runtime.DecimalJsLike | number | string
-  description?: string | null
-  transactionDate?: Date | string
-}
-
-export type TeamFinanceCreateOrConnectWithoutReferenceTransactionInput = {
-  where: Prisma.TeamFinanceWhereUniqueInput
-  create: Prisma.XOR<Prisma.TeamFinanceCreateWithoutReferenceTransactionInput, Prisma.TeamFinanceUncheckedCreateWithoutReferenceTransactionInput>
-}
-
-export type TeamFinanceCreateManyReferenceTransactionInputEnvelope = {
-  data: Prisma.TeamFinanceCreateManyReferenceTransactionInput | Prisma.TeamFinanceCreateManyReferenceTransactionInput[]
-  skipDuplicates?: boolean
-}
-
-export type TeamFinanceUpsertWithWhereUniqueWithoutReferenceTransactionInput = {
-  where: Prisma.TeamFinanceWhereUniqueInput
-  update: Prisma.XOR<Prisma.TeamFinanceUpdateWithoutReferenceTransactionInput, Prisma.TeamFinanceUncheckedUpdateWithoutReferenceTransactionInput>
-  create: Prisma.XOR<Prisma.TeamFinanceCreateWithoutReferenceTransactionInput, Prisma.TeamFinanceUncheckedCreateWithoutReferenceTransactionInput>
-}
-
-export type TeamFinanceUpdateWithWhereUniqueWithoutReferenceTransactionInput = {
-  where: Prisma.TeamFinanceWhereUniqueInput
-  data: Prisma.XOR<Prisma.TeamFinanceUpdateWithoutReferenceTransactionInput, Prisma.TeamFinanceUncheckedUpdateWithoutReferenceTransactionInput>
-}
-
-export type TeamFinanceUpdateManyWithWhereWithoutReferenceTransactionInput = {
-  where: Prisma.TeamFinanceScalarWhereInput
-  data: Prisma.XOR<Prisma.TeamFinanceUpdateManyMutationInput, Prisma.TeamFinanceUncheckedUpdateManyWithoutReferenceTransactionInput>
 }
 
 export type TeamFinanceCreateManyTeamInput = {
@@ -641,8 +551,8 @@ export type TeamFinanceUpdateWithoutTeamInput = {
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   balanceAfter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referenceTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  referenceTransaction?: Prisma.TransferTransactionUpdateOneWithoutFinancesNestedInput
 }
 
 export type TeamFinanceUncheckedUpdateWithoutTeamInput = {
@@ -665,46 +575,6 @@ export type TeamFinanceUncheckedUpdateManyWithoutTeamInput = {
   transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type TeamFinanceCreateManyReferenceTransactionInput = {
-  id?: string
-  teamId: string
-  transactionType: string
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  balanceAfter: runtime.Decimal | runtime.DecimalJsLike | number | string
-  description?: string | null
-  transactionDate?: Date | string
-}
-
-export type TeamFinanceUpdateWithoutReferenceTransactionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  transactionType?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balanceAfter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  team?: Prisma.TeamUpdateOneRequiredWithoutFinancesNestedInput
-}
-
-export type TeamFinanceUncheckedUpdateWithoutReferenceTransactionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  teamId?: Prisma.StringFieldUpdateOperationsInput | string
-  transactionType?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balanceAfter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type TeamFinanceUncheckedUpdateManyWithoutReferenceTransactionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  teamId?: Prisma.StringFieldUpdateOperationsInput | string
-  transactionType?: Prisma.StringFieldUpdateOperationsInput | string
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  balanceAfter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transactionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 
 
 export type TeamFinanceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -717,7 +587,6 @@ export type TeamFinanceSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   referenceTransactionId?: boolean
   transactionDate?: boolean
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
-  referenceTransaction?: boolean | Prisma.TeamFinance$referenceTransactionArgs<ExtArgs>
 }, ExtArgs["result"]["teamFinance"]>
 
 export type TeamFinanceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -730,7 +599,6 @@ export type TeamFinanceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   referenceTransactionId?: boolean
   transactionDate?: boolean
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
-  referenceTransaction?: boolean | Prisma.TeamFinance$referenceTransactionArgs<ExtArgs>
 }, ExtArgs["result"]["teamFinance"]>
 
 export type TeamFinanceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -743,7 +611,6 @@ export type TeamFinanceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   referenceTransactionId?: boolean
   transactionDate?: boolean
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
-  referenceTransaction?: boolean | Prisma.TeamFinance$referenceTransactionArgs<ExtArgs>
 }, ExtArgs["result"]["teamFinance"]>
 
 export type TeamFinanceSelectScalar = {
@@ -760,22 +627,18 @@ export type TeamFinanceSelectScalar = {
 export type TeamFinanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "teamId" | "transactionType" | "amount" | "balanceAfter" | "description" | "referenceTransactionId" | "transactionDate", ExtArgs["result"]["teamFinance"]>
 export type TeamFinanceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
-  referenceTransaction?: boolean | Prisma.TeamFinance$referenceTransactionArgs<ExtArgs>
 }
 export type TeamFinanceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
-  referenceTransaction?: boolean | Prisma.TeamFinance$referenceTransactionArgs<ExtArgs>
 }
 export type TeamFinanceIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
-  referenceTransaction?: boolean | Prisma.TeamFinance$referenceTransactionArgs<ExtArgs>
 }
 
 export type $TeamFinancePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "TeamFinance"
   objects: {
     team: Prisma.$TeamPayload<ExtArgs>
-    referenceTransaction: Prisma.$TransferTransactionPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1181,7 +1044,6 @@ readonly fields: TeamFinanceFieldRefs;
 export interface Prisma__TeamFinanceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   team<T extends Prisma.TeamDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TeamDefaultArgs<ExtArgs>>): Prisma.Prisma__TeamClient<runtime.Types.Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  referenceTransaction<T extends Prisma.TeamFinance$referenceTransactionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TeamFinance$referenceTransactionArgs<ExtArgs>>): Prisma.Prisma__TransferTransactionClient<runtime.Types.Result.GetResult<Prisma.$TransferTransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1612,25 +1474,6 @@ export type TeamFinanceDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many TeamFinances to delete.
    */
   limit?: number
-}
-
-/**
- * TeamFinance.referenceTransaction
- */
-export type TeamFinance$referenceTransactionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the TransferTransaction
-   */
-  select?: Prisma.TransferTransactionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the TransferTransaction
-   */
-  omit?: Prisma.TransferTransactionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TransferTransactionInclude<ExtArgs> | null
-  where?: Prisma.TransferTransactionWhereInput
 }
 
 /**

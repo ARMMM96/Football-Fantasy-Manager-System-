@@ -225,15 +225,15 @@ export type TransferListingWhereInput = {
   AND?: Prisma.TransferListingWhereInput | Prisma.TransferListingWhereInput[]
   OR?: Prisma.TransferListingWhereInput[]
   NOT?: Prisma.TransferListingWhereInput | Prisma.TransferListingWhereInput[]
-  id?: Prisma.StringFilter<"TransferListing"> | string
-  playerId?: Prisma.StringFilter<"TransferListing"> | string
-  sellerTeamId?: Prisma.StringFilter<"TransferListing"> | string
+  id?: Prisma.UuidFilter<"TransferListing"> | string
+  playerId?: Prisma.UuidFilter<"TransferListing"> | string
+  sellerTeamId?: Prisma.UuidFilter<"TransferListing"> | string
   askingPrice?: Prisma.DecimalFilter<"TransferListing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.StringFilter<"TransferListing"> | string
   listedAt?: Prisma.DateTimeFilter<"TransferListing"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TransferListing"> | Date | string
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
-  sellerTeam?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
+  team?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
 }
 
 export type TransferListingOrderByWithRelationInput = {
@@ -245,7 +245,7 @@ export type TransferListingOrderByWithRelationInput = {
   listedAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   player?: Prisma.PlayerOrderByWithRelationInput
-  sellerTeam?: Prisma.TeamOrderByWithRelationInput
+  team?: Prisma.TeamOrderByWithRelationInput
 }
 
 export type TransferListingWhereUniqueInput = Prisma.AtLeast<{
@@ -254,13 +254,13 @@ export type TransferListingWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.TransferListingWhereInput | Prisma.TransferListingWhereInput[]
   OR?: Prisma.TransferListingWhereInput[]
   NOT?: Prisma.TransferListingWhereInput | Prisma.TransferListingWhereInput[]
-  sellerTeamId?: Prisma.StringFilter<"TransferListing"> | string
+  sellerTeamId?: Prisma.UuidFilter<"TransferListing"> | string
   askingPrice?: Prisma.DecimalFilter<"TransferListing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.StringFilter<"TransferListing"> | string
   listedAt?: Prisma.DateTimeFilter<"TransferListing"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TransferListing"> | Date | string
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
-  sellerTeam?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
+  team?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
 }, "id" | "playerId">
 
 export type TransferListingOrderByWithAggregationInput = {
@@ -282,9 +282,9 @@ export type TransferListingScalarWhereWithAggregatesInput = {
   AND?: Prisma.TransferListingScalarWhereWithAggregatesInput | Prisma.TransferListingScalarWhereWithAggregatesInput[]
   OR?: Prisma.TransferListingScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TransferListingScalarWhereWithAggregatesInput | Prisma.TransferListingScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"TransferListing"> | string
-  playerId?: Prisma.StringWithAggregatesFilter<"TransferListing"> | string
-  sellerTeamId?: Prisma.StringWithAggregatesFilter<"TransferListing"> | string
+  id?: Prisma.UuidWithAggregatesFilter<"TransferListing"> | string
+  playerId?: Prisma.UuidWithAggregatesFilter<"TransferListing"> | string
+  sellerTeamId?: Prisma.UuidWithAggregatesFilter<"TransferListing"> | string
   askingPrice?: Prisma.DecimalWithAggregatesFilter<"TransferListing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.StringWithAggregatesFilter<"TransferListing"> | string
   listedAt?: Prisma.DateTimeWithAggregatesFilter<"TransferListing"> | Date | string
@@ -298,7 +298,7 @@ export type TransferListingCreateInput = {
   listedAt?: Date | string
   updatedAt?: Date | string
   player: Prisma.PlayerCreateNestedOneWithoutTransferListingInput
-  sellerTeam: Prisma.TeamCreateNestedOneWithoutTransferListingsInput
+  team: Prisma.TeamCreateNestedOneWithoutTransferListingsInput
 }
 
 export type TransferListingUncheckedCreateInput = {
@@ -318,7 +318,7 @@ export type TransferListingUpdateInput = {
   listedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   player?: Prisma.PlayerUpdateOneRequiredWithoutTransferListingNestedInput
-  sellerTeam?: Prisma.TeamUpdateOneRequiredWithoutTransferListingsNestedInput
+  team?: Prisma.TeamUpdateOneRequiredWithoutTransferListingsNestedInput
 }
 
 export type TransferListingUncheckedUpdateInput = {
@@ -412,45 +412,45 @@ export type TransferListingSumOrderByAggregateInput = {
   askingPrice?: Prisma.SortOrder
 }
 
-export type TransferListingCreateNestedManyWithoutSellerTeamInput = {
-  create?: Prisma.XOR<Prisma.TransferListingCreateWithoutSellerTeamInput, Prisma.TransferListingUncheckedCreateWithoutSellerTeamInput> | Prisma.TransferListingCreateWithoutSellerTeamInput[] | Prisma.TransferListingUncheckedCreateWithoutSellerTeamInput[]
-  connectOrCreate?: Prisma.TransferListingCreateOrConnectWithoutSellerTeamInput | Prisma.TransferListingCreateOrConnectWithoutSellerTeamInput[]
-  createMany?: Prisma.TransferListingCreateManySellerTeamInputEnvelope
+export type TransferListingCreateNestedManyWithoutTeamInput = {
+  create?: Prisma.XOR<Prisma.TransferListingCreateWithoutTeamInput, Prisma.TransferListingUncheckedCreateWithoutTeamInput> | Prisma.TransferListingCreateWithoutTeamInput[] | Prisma.TransferListingUncheckedCreateWithoutTeamInput[]
+  connectOrCreate?: Prisma.TransferListingCreateOrConnectWithoutTeamInput | Prisma.TransferListingCreateOrConnectWithoutTeamInput[]
+  createMany?: Prisma.TransferListingCreateManyTeamInputEnvelope
   connect?: Prisma.TransferListingWhereUniqueInput | Prisma.TransferListingWhereUniqueInput[]
 }
 
-export type TransferListingUncheckedCreateNestedManyWithoutSellerTeamInput = {
-  create?: Prisma.XOR<Prisma.TransferListingCreateWithoutSellerTeamInput, Prisma.TransferListingUncheckedCreateWithoutSellerTeamInput> | Prisma.TransferListingCreateWithoutSellerTeamInput[] | Prisma.TransferListingUncheckedCreateWithoutSellerTeamInput[]
-  connectOrCreate?: Prisma.TransferListingCreateOrConnectWithoutSellerTeamInput | Prisma.TransferListingCreateOrConnectWithoutSellerTeamInput[]
-  createMany?: Prisma.TransferListingCreateManySellerTeamInputEnvelope
+export type TransferListingUncheckedCreateNestedManyWithoutTeamInput = {
+  create?: Prisma.XOR<Prisma.TransferListingCreateWithoutTeamInput, Prisma.TransferListingUncheckedCreateWithoutTeamInput> | Prisma.TransferListingCreateWithoutTeamInput[] | Prisma.TransferListingUncheckedCreateWithoutTeamInput[]
+  connectOrCreate?: Prisma.TransferListingCreateOrConnectWithoutTeamInput | Prisma.TransferListingCreateOrConnectWithoutTeamInput[]
+  createMany?: Prisma.TransferListingCreateManyTeamInputEnvelope
   connect?: Prisma.TransferListingWhereUniqueInput | Prisma.TransferListingWhereUniqueInput[]
 }
 
-export type TransferListingUpdateManyWithoutSellerTeamNestedInput = {
-  create?: Prisma.XOR<Prisma.TransferListingCreateWithoutSellerTeamInput, Prisma.TransferListingUncheckedCreateWithoutSellerTeamInput> | Prisma.TransferListingCreateWithoutSellerTeamInput[] | Prisma.TransferListingUncheckedCreateWithoutSellerTeamInput[]
-  connectOrCreate?: Prisma.TransferListingCreateOrConnectWithoutSellerTeamInput | Prisma.TransferListingCreateOrConnectWithoutSellerTeamInput[]
-  upsert?: Prisma.TransferListingUpsertWithWhereUniqueWithoutSellerTeamInput | Prisma.TransferListingUpsertWithWhereUniqueWithoutSellerTeamInput[]
-  createMany?: Prisma.TransferListingCreateManySellerTeamInputEnvelope
+export type TransferListingUpdateManyWithoutTeamNestedInput = {
+  create?: Prisma.XOR<Prisma.TransferListingCreateWithoutTeamInput, Prisma.TransferListingUncheckedCreateWithoutTeamInput> | Prisma.TransferListingCreateWithoutTeamInput[] | Prisma.TransferListingUncheckedCreateWithoutTeamInput[]
+  connectOrCreate?: Prisma.TransferListingCreateOrConnectWithoutTeamInput | Prisma.TransferListingCreateOrConnectWithoutTeamInput[]
+  upsert?: Prisma.TransferListingUpsertWithWhereUniqueWithoutTeamInput | Prisma.TransferListingUpsertWithWhereUniqueWithoutTeamInput[]
+  createMany?: Prisma.TransferListingCreateManyTeamInputEnvelope
   set?: Prisma.TransferListingWhereUniqueInput | Prisma.TransferListingWhereUniqueInput[]
   disconnect?: Prisma.TransferListingWhereUniqueInput | Prisma.TransferListingWhereUniqueInput[]
   delete?: Prisma.TransferListingWhereUniqueInput | Prisma.TransferListingWhereUniqueInput[]
   connect?: Prisma.TransferListingWhereUniqueInput | Prisma.TransferListingWhereUniqueInput[]
-  update?: Prisma.TransferListingUpdateWithWhereUniqueWithoutSellerTeamInput | Prisma.TransferListingUpdateWithWhereUniqueWithoutSellerTeamInput[]
-  updateMany?: Prisma.TransferListingUpdateManyWithWhereWithoutSellerTeamInput | Prisma.TransferListingUpdateManyWithWhereWithoutSellerTeamInput[]
+  update?: Prisma.TransferListingUpdateWithWhereUniqueWithoutTeamInput | Prisma.TransferListingUpdateWithWhereUniqueWithoutTeamInput[]
+  updateMany?: Prisma.TransferListingUpdateManyWithWhereWithoutTeamInput | Prisma.TransferListingUpdateManyWithWhereWithoutTeamInput[]
   deleteMany?: Prisma.TransferListingScalarWhereInput | Prisma.TransferListingScalarWhereInput[]
 }
 
-export type TransferListingUncheckedUpdateManyWithoutSellerTeamNestedInput = {
-  create?: Prisma.XOR<Prisma.TransferListingCreateWithoutSellerTeamInput, Prisma.TransferListingUncheckedCreateWithoutSellerTeamInput> | Prisma.TransferListingCreateWithoutSellerTeamInput[] | Prisma.TransferListingUncheckedCreateWithoutSellerTeamInput[]
-  connectOrCreate?: Prisma.TransferListingCreateOrConnectWithoutSellerTeamInput | Prisma.TransferListingCreateOrConnectWithoutSellerTeamInput[]
-  upsert?: Prisma.TransferListingUpsertWithWhereUniqueWithoutSellerTeamInput | Prisma.TransferListingUpsertWithWhereUniqueWithoutSellerTeamInput[]
-  createMany?: Prisma.TransferListingCreateManySellerTeamInputEnvelope
+export type TransferListingUncheckedUpdateManyWithoutTeamNestedInput = {
+  create?: Prisma.XOR<Prisma.TransferListingCreateWithoutTeamInput, Prisma.TransferListingUncheckedCreateWithoutTeamInput> | Prisma.TransferListingCreateWithoutTeamInput[] | Prisma.TransferListingUncheckedCreateWithoutTeamInput[]
+  connectOrCreate?: Prisma.TransferListingCreateOrConnectWithoutTeamInput | Prisma.TransferListingCreateOrConnectWithoutTeamInput[]
+  upsert?: Prisma.TransferListingUpsertWithWhereUniqueWithoutTeamInput | Prisma.TransferListingUpsertWithWhereUniqueWithoutTeamInput[]
+  createMany?: Prisma.TransferListingCreateManyTeamInputEnvelope
   set?: Prisma.TransferListingWhereUniqueInput | Prisma.TransferListingWhereUniqueInput[]
   disconnect?: Prisma.TransferListingWhereUniqueInput | Prisma.TransferListingWhereUniqueInput[]
   delete?: Prisma.TransferListingWhereUniqueInput | Prisma.TransferListingWhereUniqueInput[]
   connect?: Prisma.TransferListingWhereUniqueInput | Prisma.TransferListingWhereUniqueInput[]
-  update?: Prisma.TransferListingUpdateWithWhereUniqueWithoutSellerTeamInput | Prisma.TransferListingUpdateWithWhereUniqueWithoutSellerTeamInput[]
-  updateMany?: Prisma.TransferListingUpdateManyWithWhereWithoutSellerTeamInput | Prisma.TransferListingUpdateManyWithWhereWithoutSellerTeamInput[]
+  update?: Prisma.TransferListingUpdateWithWhereUniqueWithoutTeamInput | Prisma.TransferListingUpdateWithWhereUniqueWithoutTeamInput[]
+  updateMany?: Prisma.TransferListingUpdateManyWithWhereWithoutTeamInput | Prisma.TransferListingUpdateManyWithWhereWithoutTeamInput[]
   deleteMany?: Prisma.TransferListingScalarWhereInput | Prisma.TransferListingScalarWhereInput[]
 }
 
@@ -486,7 +486,7 @@ export type TransferListingUncheckedUpdateOneWithoutPlayerNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TransferListingUpdateToOneWithWhereWithoutPlayerInput, Prisma.TransferListingUpdateWithoutPlayerInput>, Prisma.TransferListingUncheckedUpdateWithoutPlayerInput>
 }
 
-export type TransferListingCreateWithoutSellerTeamInput = {
+export type TransferListingCreateWithoutTeamInput = {
   id?: string
   askingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: string
@@ -495,7 +495,7 @@ export type TransferListingCreateWithoutSellerTeamInput = {
   player: Prisma.PlayerCreateNestedOneWithoutTransferListingInput
 }
 
-export type TransferListingUncheckedCreateWithoutSellerTeamInput = {
+export type TransferListingUncheckedCreateWithoutTeamInput = {
   id?: string
   playerId: string
   askingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -504,39 +504,39 @@ export type TransferListingUncheckedCreateWithoutSellerTeamInput = {
   updatedAt?: Date | string
 }
 
-export type TransferListingCreateOrConnectWithoutSellerTeamInput = {
+export type TransferListingCreateOrConnectWithoutTeamInput = {
   where: Prisma.TransferListingWhereUniqueInput
-  create: Prisma.XOR<Prisma.TransferListingCreateWithoutSellerTeamInput, Prisma.TransferListingUncheckedCreateWithoutSellerTeamInput>
+  create: Prisma.XOR<Prisma.TransferListingCreateWithoutTeamInput, Prisma.TransferListingUncheckedCreateWithoutTeamInput>
 }
 
-export type TransferListingCreateManySellerTeamInputEnvelope = {
-  data: Prisma.TransferListingCreateManySellerTeamInput | Prisma.TransferListingCreateManySellerTeamInput[]
+export type TransferListingCreateManyTeamInputEnvelope = {
+  data: Prisma.TransferListingCreateManyTeamInput | Prisma.TransferListingCreateManyTeamInput[]
   skipDuplicates?: boolean
 }
 
-export type TransferListingUpsertWithWhereUniqueWithoutSellerTeamInput = {
+export type TransferListingUpsertWithWhereUniqueWithoutTeamInput = {
   where: Prisma.TransferListingWhereUniqueInput
-  update: Prisma.XOR<Prisma.TransferListingUpdateWithoutSellerTeamInput, Prisma.TransferListingUncheckedUpdateWithoutSellerTeamInput>
-  create: Prisma.XOR<Prisma.TransferListingCreateWithoutSellerTeamInput, Prisma.TransferListingUncheckedCreateWithoutSellerTeamInput>
+  update: Prisma.XOR<Prisma.TransferListingUpdateWithoutTeamInput, Prisma.TransferListingUncheckedUpdateWithoutTeamInput>
+  create: Prisma.XOR<Prisma.TransferListingCreateWithoutTeamInput, Prisma.TransferListingUncheckedCreateWithoutTeamInput>
 }
 
-export type TransferListingUpdateWithWhereUniqueWithoutSellerTeamInput = {
+export type TransferListingUpdateWithWhereUniqueWithoutTeamInput = {
   where: Prisma.TransferListingWhereUniqueInput
-  data: Prisma.XOR<Prisma.TransferListingUpdateWithoutSellerTeamInput, Prisma.TransferListingUncheckedUpdateWithoutSellerTeamInput>
+  data: Prisma.XOR<Prisma.TransferListingUpdateWithoutTeamInput, Prisma.TransferListingUncheckedUpdateWithoutTeamInput>
 }
 
-export type TransferListingUpdateManyWithWhereWithoutSellerTeamInput = {
+export type TransferListingUpdateManyWithWhereWithoutTeamInput = {
   where: Prisma.TransferListingScalarWhereInput
-  data: Prisma.XOR<Prisma.TransferListingUpdateManyMutationInput, Prisma.TransferListingUncheckedUpdateManyWithoutSellerTeamInput>
+  data: Prisma.XOR<Prisma.TransferListingUpdateManyMutationInput, Prisma.TransferListingUncheckedUpdateManyWithoutTeamInput>
 }
 
 export type TransferListingScalarWhereInput = {
   AND?: Prisma.TransferListingScalarWhereInput | Prisma.TransferListingScalarWhereInput[]
   OR?: Prisma.TransferListingScalarWhereInput[]
   NOT?: Prisma.TransferListingScalarWhereInput | Prisma.TransferListingScalarWhereInput[]
-  id?: Prisma.StringFilter<"TransferListing"> | string
-  playerId?: Prisma.StringFilter<"TransferListing"> | string
-  sellerTeamId?: Prisma.StringFilter<"TransferListing"> | string
+  id?: Prisma.UuidFilter<"TransferListing"> | string
+  playerId?: Prisma.UuidFilter<"TransferListing"> | string
+  sellerTeamId?: Prisma.UuidFilter<"TransferListing"> | string
   askingPrice?: Prisma.DecimalFilter<"TransferListing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.StringFilter<"TransferListing"> | string
   listedAt?: Prisma.DateTimeFilter<"TransferListing"> | Date | string
@@ -549,7 +549,7 @@ export type TransferListingCreateWithoutPlayerInput = {
   status?: string
   listedAt?: Date | string
   updatedAt?: Date | string
-  sellerTeam: Prisma.TeamCreateNestedOneWithoutTransferListingsInput
+  team: Prisma.TeamCreateNestedOneWithoutTransferListingsInput
 }
 
 export type TransferListingUncheckedCreateWithoutPlayerInput = {
@@ -583,7 +583,7 @@ export type TransferListingUpdateWithoutPlayerInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   listedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sellerTeam?: Prisma.TeamUpdateOneRequiredWithoutTransferListingsNestedInput
+  team?: Prisma.TeamUpdateOneRequiredWithoutTransferListingsNestedInput
 }
 
 export type TransferListingUncheckedUpdateWithoutPlayerInput = {
@@ -595,7 +595,7 @@ export type TransferListingUncheckedUpdateWithoutPlayerInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type TransferListingCreateManySellerTeamInput = {
+export type TransferListingCreateManyTeamInput = {
   id?: string
   playerId: string
   askingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -604,7 +604,7 @@ export type TransferListingCreateManySellerTeamInput = {
   updatedAt?: Date | string
 }
 
-export type TransferListingUpdateWithoutSellerTeamInput = {
+export type TransferListingUpdateWithoutTeamInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   askingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
@@ -613,7 +613,7 @@ export type TransferListingUpdateWithoutSellerTeamInput = {
   player?: Prisma.PlayerUpdateOneRequiredWithoutTransferListingNestedInput
 }
 
-export type TransferListingUncheckedUpdateWithoutSellerTeamInput = {
+export type TransferListingUncheckedUpdateWithoutTeamInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
   askingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -622,7 +622,7 @@ export type TransferListingUncheckedUpdateWithoutSellerTeamInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type TransferListingUncheckedUpdateManyWithoutSellerTeamInput = {
+export type TransferListingUncheckedUpdateManyWithoutTeamInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
   askingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -642,7 +642,7 @@ export type TransferListingSelect<ExtArgs extends runtime.Types.Extensions.Inter
   listedAt?: boolean
   updatedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  sellerTeam?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
+  team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["transferListing"]>
 
 export type TransferListingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -654,7 +654,7 @@ export type TransferListingSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   listedAt?: boolean
   updatedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  sellerTeam?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
+  team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["transferListing"]>
 
 export type TransferListingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -666,7 +666,7 @@ export type TransferListingSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   listedAt?: boolean
   updatedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  sellerTeam?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
+  team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["transferListing"]>
 
 export type TransferListingSelectScalar = {
@@ -682,22 +682,22 @@ export type TransferListingSelectScalar = {
 export type TransferListingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "sellerTeamId" | "askingPrice" | "status" | "listedAt" | "updatedAt", ExtArgs["result"]["transferListing"]>
 export type TransferListingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  sellerTeam?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
+  team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
 }
 export type TransferListingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  sellerTeam?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
+  team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
 }
 export type TransferListingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  sellerTeam?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
+  team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
 }
 
 export type $TransferListingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "TransferListing"
   objects: {
     player: Prisma.$PlayerPayload<ExtArgs>
-    sellerTeam: Prisma.$TeamPayload<ExtArgs>
+    team: Prisma.$TeamPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1102,7 +1102,7 @@ readonly fields: TransferListingFieldRefs;
 export interface Prisma__TransferListingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   player<T extends Prisma.PlayerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlayerDefaultArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  sellerTeam<T extends Prisma.TeamDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TeamDefaultArgs<ExtArgs>>): Prisma.Prisma__TeamClient<runtime.Types.Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  team<T extends Prisma.TeamDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TeamDefaultArgs<ExtArgs>>): Prisma.Prisma__TeamClient<runtime.Types.Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

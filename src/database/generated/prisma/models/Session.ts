@@ -191,8 +191,8 @@ export type SessionWhereInput = {
   AND?: Prisma.SessionWhereInput | Prisma.SessionWhereInput[]
   OR?: Prisma.SessionWhereInput[]
   NOT?: Prisma.SessionWhereInput | Prisma.SessionWhereInput[]
-  id?: Prisma.StringFilter<"Session"> | string
-  userId?: Prisma.StringFilter<"Session"> | string
+  id?: Prisma.UuidFilter<"Session"> | string
+  userId?: Prisma.UuidFilter<"Session"> | string
   tokenHash?: Prisma.StringFilter<"Session"> | string
   ipAddress?: Prisma.StringNullableFilter<"Session"> | string | null
   expiresAt?: Prisma.DateTimeFilter<"Session"> | Date | string
@@ -214,17 +214,17 @@ export type SessionOrderByWithRelationInput = {
 
 export type SessionWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  tokenHash?: string
   AND?: Prisma.SessionWhereInput | Prisma.SessionWhereInput[]
   OR?: Prisma.SessionWhereInput[]
   NOT?: Prisma.SessionWhereInput | Prisma.SessionWhereInput[]
-  userId?: Prisma.StringFilter<"Session"> | string
-  tokenHash?: Prisma.StringFilter<"Session"> | string
+  userId?: Prisma.UuidFilter<"Session"> | string
   ipAddress?: Prisma.StringNullableFilter<"Session"> | string | null
   expiresAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   isActive?: Prisma.BoolFilter<"Session"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+}, "id" | "tokenHash">
 
 export type SessionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -243,8 +243,8 @@ export type SessionScalarWhereWithAggregatesInput = {
   AND?: Prisma.SessionScalarWhereWithAggregatesInput | Prisma.SessionScalarWhereWithAggregatesInput[]
   OR?: Prisma.SessionScalarWhereWithAggregatesInput[]
   NOT?: Prisma.SessionScalarWhereWithAggregatesInput | Prisma.SessionScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Session"> | string
-  userId?: Prisma.StringWithAggregatesFilter<"Session"> | string
+  id?: Prisma.UuidWithAggregatesFilter<"Session"> | string
+  userId?: Prisma.UuidWithAggregatesFilter<"Session"> | string
   tokenHash?: Prisma.StringWithAggregatesFilter<"Session"> | string
   ipAddress?: Prisma.StringNullableWithAggregatesFilter<"Session"> | string | null
   expiresAt?: Prisma.DateTimeWithAggregatesFilter<"Session"> | Date | string
@@ -403,6 +403,10 @@ export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.SessionScalarWhereInput | Prisma.SessionScalarWhereInput[]
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type SessionCreateWithoutUserInput = {
   id?: string
   tokenHash: string
@@ -451,8 +455,8 @@ export type SessionScalarWhereInput = {
   AND?: Prisma.SessionScalarWhereInput | Prisma.SessionScalarWhereInput[]
   OR?: Prisma.SessionScalarWhereInput[]
   NOT?: Prisma.SessionScalarWhereInput | Prisma.SessionScalarWhereInput[]
-  id?: Prisma.StringFilter<"Session"> | string
-  userId?: Prisma.StringFilter<"Session"> | string
+  id?: Prisma.UuidFilter<"Session"> | string
+  userId?: Prisma.UuidFilter<"Session"> | string
   tokenHash?: Prisma.StringFilter<"Session"> | string
   ipAddress?: Prisma.StringNullableFilter<"Session"> | string | null
   expiresAt?: Prisma.DateTimeFilter<"Session"> | Date | string

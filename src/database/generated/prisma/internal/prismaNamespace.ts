@@ -386,12 +386,12 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Role: 'Role',
   User: 'User',
-  Team: 'Team',
-  Player: 'Player',
   Session: 'Session',
+  Team: 'Team',
+  TeamFinance: 'TeamFinance',
+  Player: 'Player',
   TransferListing: 'TransferListing',
   TransferTransaction: 'TransferTransaction',
-  TeamFinance: 'TeamFinance',
   AuditLog: 'AuditLog'
 } as const
 
@@ -408,7 +408,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "role" | "user" | "team" | "player" | "session" | "transferListing" | "transferTransaction" | "teamFinance" | "auditLog"
+    modelProps: "role" | "user" | "session" | "team" | "teamFinance" | "player" | "transferListing" | "transferTransaction" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -560,6 +560,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Session: {
+      payload: Prisma.$SessionPayload<ExtArgs>
+      fields: Prisma.SessionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        findFirst: {
+          args: Prisma.SessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        findMany: {
+          args: Prisma.SessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>[]
+        }
+        create: {
+          args: Prisma.SessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        createMany: {
+          args: Prisma.SessionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SessionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>[]
+        }
+        delete: {
+          args: Prisma.SessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        update: {
+          args: Prisma.SessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        deleteMany: {
+          args: Prisma.SessionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SessionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SessionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>[]
+        }
+        upsert: {
+          args: Prisma.SessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        aggregate: {
+          args: Prisma.SessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSession>
+        }
+        groupBy: {
+          args: Prisma.SessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SessionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SessionCountAggregateOutputType> | number
+        }
+      }
+    }
     Team: {
       payload: Prisma.$TeamPayload<ExtArgs>
       fields: Prisma.TeamFieldRefs
@@ -634,6 +708,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    TeamFinance: {
+      payload: Prisma.$TeamFinancePayload<ExtArgs>
+      fields: Prisma.TeamFinanceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TeamFinanceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TeamFinanceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>
+        }
+        findFirst: {
+          args: Prisma.TeamFinanceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TeamFinanceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>
+        }
+        findMany: {
+          args: Prisma.TeamFinanceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>[]
+        }
+        create: {
+          args: Prisma.TeamFinanceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>
+        }
+        createMany: {
+          args: Prisma.TeamFinanceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TeamFinanceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>[]
+        }
+        delete: {
+          args: Prisma.TeamFinanceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>
+        }
+        update: {
+          args: Prisma.TeamFinanceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>
+        }
+        deleteMany: {
+          args: Prisma.TeamFinanceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TeamFinanceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TeamFinanceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>[]
+        }
+        upsert: {
+          args: Prisma.TeamFinanceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>
+        }
+        aggregate: {
+          args: Prisma.TeamFinanceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTeamFinance>
+        }
+        groupBy: {
+          args: Prisma.TeamFinanceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TeamFinanceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TeamFinanceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TeamFinanceCountAggregateOutputType> | number
+        }
+      }
+    }
     Player: {
       payload: Prisma.$PlayerPayload<ExtArgs>
       fields: Prisma.PlayerFieldRefs
@@ -705,80 +853,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.PlayerCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.PlayerCountAggregateOutputType> | number
-        }
-      }
-    }
-    Session: {
-      payload: Prisma.$SessionPayload<ExtArgs>
-      fields: Prisma.SessionFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.SessionFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.SessionFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
-        }
-        findFirst: {
-          args: Prisma.SessionFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.SessionFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
-        }
-        findMany: {
-          args: Prisma.SessionFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>[]
-        }
-        create: {
-          args: Prisma.SessionCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
-        }
-        createMany: {
-          args: Prisma.SessionCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.SessionCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>[]
-        }
-        delete: {
-          args: Prisma.SessionDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
-        }
-        update: {
-          args: Prisma.SessionUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
-        }
-        deleteMany: {
-          args: Prisma.SessionDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.SessionUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.SessionUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>[]
-        }
-        upsert: {
-          args: Prisma.SessionUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
-        }
-        aggregate: {
-          args: Prisma.SessionAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateSession>
-        }
-        groupBy: {
-          args: Prisma.SessionGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.SessionGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.SessionCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.SessionCountAggregateOutputType> | number
         }
       }
     }
@@ -930,80 +1004,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    TeamFinance: {
-      payload: Prisma.$TeamFinancePayload<ExtArgs>
-      fields: Prisma.TeamFinanceFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.TeamFinanceFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.TeamFinanceFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>
-        }
-        findFirst: {
-          args: Prisma.TeamFinanceFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.TeamFinanceFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>
-        }
-        findMany: {
-          args: Prisma.TeamFinanceFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>[]
-        }
-        create: {
-          args: Prisma.TeamFinanceCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>
-        }
-        createMany: {
-          args: Prisma.TeamFinanceCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.TeamFinanceCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>[]
-        }
-        delete: {
-          args: Prisma.TeamFinanceDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>
-        }
-        update: {
-          args: Prisma.TeamFinanceUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>
-        }
-        deleteMany: {
-          args: Prisma.TeamFinanceDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.TeamFinanceUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.TeamFinanceUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>[]
-        }
-        upsert: {
-          args: Prisma.TeamFinanceUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeamFinancePayload>
-        }
-        aggregate: {
-          args: Prisma.TeamFinanceAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateTeamFinance>
-        }
-        groupBy: {
-          args: Prisma.TeamFinanceGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TeamFinanceGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.TeamFinanceCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TeamFinanceCountAggregateOutputType> | number
-        }
-      }
-    }
     AuditLog: {
       payload: Prisma.$AuditLogPayload<ExtArgs>
       fields: Prisma.AuditLogFieldRefs
@@ -1144,6 +1144,19 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const SessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  ipAddress: 'ipAddress',
+  expiresAt: 'expiresAt',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
+} as const
+
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
 export const TeamScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -1157,6 +1170,20 @@ export const TeamScalarFieldEnum = {
 } as const
 
 export type TeamScalarFieldEnum = (typeof TeamScalarFieldEnum)[keyof typeof TeamScalarFieldEnum]
+
+
+export const TeamFinanceScalarFieldEnum = {
+  id: 'id',
+  teamId: 'teamId',
+  transactionType: 'transactionType',
+  amount: 'amount',
+  balanceAfter: 'balanceAfter',
+  description: 'description',
+  referenceTransactionId: 'referenceTransactionId',
+  transactionDate: 'transactionDate'
+} as const
+
+export type TeamFinanceScalarFieldEnum = (typeof TeamFinanceScalarFieldEnum)[keyof typeof TeamFinanceScalarFieldEnum]
 
 
 export const PlayerScalarFieldEnum = {
@@ -1175,19 +1202,6 @@ export const PlayerScalarFieldEnum = {
 } as const
 
 export type PlayerScalarFieldEnum = (typeof PlayerScalarFieldEnum)[keyof typeof PlayerScalarFieldEnum]
-
-
-export const SessionScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  tokenHash: 'tokenHash',
-  ipAddress: 'ipAddress',
-  expiresAt: 'expiresAt',
-  isActive: 'isActive',
-  createdAt: 'createdAt'
-} as const
-
-export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
 export const TransferListingScalarFieldEnum = {
@@ -1217,20 +1231,6 @@ export const TransferTransactionScalarFieldEnum = {
 export type TransferTransactionScalarFieldEnum = (typeof TransferTransactionScalarFieldEnum)[keyof typeof TransferTransactionScalarFieldEnum]
 
 
-export const TeamFinanceScalarFieldEnum = {
-  id: 'id',
-  teamId: 'teamId',
-  transactionType: 'transactionType',
-  amount: 'amount',
-  balanceAfter: 'balanceAfter',
-  description: 'description',
-  referenceTransactionId: 'referenceTransactionId',
-  transactionDate: 'transactionDate'
-} as const
-
-export type TeamFinanceScalarFieldEnum = (typeof TeamFinanceScalarFieldEnum)[keyof typeof TeamFinanceScalarFieldEnum]
-
-
 export const AuditLogScalarFieldEnum = {
   id: 'id',
   entityType: 'entityType',
@@ -1250,6 +1250,13 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const NullableJsonNullValueInput = {
@@ -1478,12 +1485,12 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   role?: Prisma.RoleOmit
   user?: Prisma.UserOmit
-  team?: Prisma.TeamOmit
-  player?: Prisma.PlayerOmit
   session?: Prisma.SessionOmit
+  team?: Prisma.TeamOmit
+  teamFinance?: Prisma.TeamFinanceOmit
+  player?: Prisma.PlayerOmit
   transferListing?: Prisma.TransferListingOmit
   transferTransaction?: Prisma.TransferTransactionOmit
-  teamFinance?: Prisma.TeamFinanceOmit
   auditLog?: Prisma.AuditLogOmit
 }
 

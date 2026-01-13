@@ -211,7 +211,7 @@ export type TeamGroupByOutputType = {
   id: string
   userId: string
   name: string
-  country: string | null
+  country: string
   budget: runtime.Decimal
   totalPlayers: number
   isTeamReady: boolean
@@ -243,10 +243,10 @@ export type TeamWhereInput = {
   AND?: Prisma.TeamWhereInput | Prisma.TeamWhereInput[]
   OR?: Prisma.TeamWhereInput[]
   NOT?: Prisma.TeamWhereInput | Prisma.TeamWhereInput[]
-  id?: Prisma.StringFilter<"Team"> | string
-  userId?: Prisma.StringFilter<"Team"> | string
+  id?: Prisma.UuidFilter<"Team"> | string
+  userId?: Prisma.UuidFilter<"Team"> | string
   name?: Prisma.StringFilter<"Team"> | string
-  country?: Prisma.StringNullableFilter<"Team"> | string | null
+  country?: Prisma.StringFilter<"Team"> | string
   budget?: Prisma.DecimalFilter<"Team"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntFilter<"Team"> | number
   isTeamReady?: Prisma.BoolFilter<"Team"> | boolean
@@ -254,17 +254,17 @@ export type TeamWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Team"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   players?: Prisma.PlayerListRelationFilter
-  finances?: Prisma.TeamFinanceListRelationFilter
+  sellTransactions?: Prisma.TransferTransactionListRelationFilter
+  buyTransactions?: Prisma.TransferTransactionListRelationFilter
+  financeRecords?: Prisma.TeamFinanceListRelationFilter
   transferListings?: Prisma.TransferListingListRelationFilter
-  soldTransactions?: Prisma.TransferTransactionListRelationFilter
-  boughtTransactions?: Prisma.TransferTransactionListRelationFilter
 }
 
 export type TeamOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  country?: Prisma.SortOrderInput | Prisma.SortOrder
+  country?: Prisma.SortOrder
   budget?: Prisma.SortOrder
   totalPlayers?: Prisma.SortOrder
   isTeamReady?: Prisma.SortOrder
@@ -272,10 +272,10 @@ export type TeamOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   players?: Prisma.PlayerOrderByRelationAggregateInput
-  finances?: Prisma.TeamFinanceOrderByRelationAggregateInput
+  sellTransactions?: Prisma.TransferTransactionOrderByRelationAggregateInput
+  buyTransactions?: Prisma.TransferTransactionOrderByRelationAggregateInput
+  financeRecords?: Prisma.TeamFinanceOrderByRelationAggregateInput
   transferListings?: Prisma.TransferListingOrderByRelationAggregateInput
-  soldTransactions?: Prisma.TransferTransactionOrderByRelationAggregateInput
-  boughtTransactions?: Prisma.TransferTransactionOrderByRelationAggregateInput
 }
 
 export type TeamWhereUniqueInput = Prisma.AtLeast<{
@@ -285,7 +285,7 @@ export type TeamWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.TeamWhereInput[]
   NOT?: Prisma.TeamWhereInput | Prisma.TeamWhereInput[]
   name?: Prisma.StringFilter<"Team"> | string
-  country?: Prisma.StringNullableFilter<"Team"> | string | null
+  country?: Prisma.StringFilter<"Team"> | string
   budget?: Prisma.DecimalFilter<"Team"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntFilter<"Team"> | number
   isTeamReady?: Prisma.BoolFilter<"Team"> | boolean
@@ -293,17 +293,17 @@ export type TeamWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Team"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   players?: Prisma.PlayerListRelationFilter
-  finances?: Prisma.TeamFinanceListRelationFilter
+  sellTransactions?: Prisma.TransferTransactionListRelationFilter
+  buyTransactions?: Prisma.TransferTransactionListRelationFilter
+  financeRecords?: Prisma.TeamFinanceListRelationFilter
   transferListings?: Prisma.TransferListingListRelationFilter
-  soldTransactions?: Prisma.TransferTransactionListRelationFilter
-  boughtTransactions?: Prisma.TransferTransactionListRelationFilter
 }, "id" | "userId">
 
 export type TeamOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  country?: Prisma.SortOrderInput | Prisma.SortOrder
+  country?: Prisma.SortOrder
   budget?: Prisma.SortOrder
   totalPlayers?: Prisma.SortOrder
   isTeamReady?: Prisma.SortOrder
@@ -320,10 +320,10 @@ export type TeamScalarWhereWithAggregatesInput = {
   AND?: Prisma.TeamScalarWhereWithAggregatesInput | Prisma.TeamScalarWhereWithAggregatesInput[]
   OR?: Prisma.TeamScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TeamScalarWhereWithAggregatesInput | Prisma.TeamScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Team"> | string
-  userId?: Prisma.StringWithAggregatesFilter<"Team"> | string
+  id?: Prisma.UuidWithAggregatesFilter<"Team"> | string
+  userId?: Prisma.UuidWithAggregatesFilter<"Team"> | string
   name?: Prisma.StringWithAggregatesFilter<"Team"> | string
-  country?: Prisma.StringNullableWithAggregatesFilter<"Team"> | string | null
+  country?: Prisma.StringWithAggregatesFilter<"Team"> | string
   budget?: Prisma.DecimalWithAggregatesFilter<"Team"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntWithAggregatesFilter<"Team"> | number
   isTeamReady?: Prisma.BoolWithAggregatesFilter<"Team"> | boolean
@@ -334,7 +334,7 @@ export type TeamScalarWhereWithAggregatesInput = {
 export type TeamCreateInput = {
   id?: string
   name: string
-  country?: string | null
+  country?: string
   budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: number
   isTeamReady?: boolean
@@ -342,33 +342,33 @@ export type TeamCreateInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutTeamInput
   players?: Prisma.PlayerCreateNestedManyWithoutTeamInput
-  finances?: Prisma.TeamFinanceCreateNestedManyWithoutTeamInput
-  transferListings?: Prisma.TransferListingCreateNestedManyWithoutSellerTeamInput
-  soldTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutSellerTeamInput
-  boughtTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutBuyerTeamInput
+  sellTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutSellerTeamInput
+  buyTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutBuyerTeamInput
+  financeRecords?: Prisma.TeamFinanceCreateNestedManyWithoutTeamInput
+  transferListings?: Prisma.TransferListingCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateInput = {
   id?: string
   userId: string
   name: string
-  country?: string | null
+  country?: string
   budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: number
   isTeamReady?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   players?: Prisma.PlayerUncheckedCreateNestedManyWithoutTeamInput
-  finances?: Prisma.TeamFinanceUncheckedCreateNestedManyWithoutTeamInput
-  transferListings?: Prisma.TransferListingUncheckedCreateNestedManyWithoutSellerTeamInput
-  soldTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutSellerTeamInput
-  boughtTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutBuyerTeamInput
+  sellTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutSellerTeamInput
+  buyTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutBuyerTeamInput
+  financeRecords?: Prisma.TeamFinanceUncheckedCreateNestedManyWithoutTeamInput
+  transferListings?: Prisma.TransferListingUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
   budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
   isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -376,34 +376,34 @@ export type TeamUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutTeamNestedInput
   players?: Prisma.PlayerUpdateManyWithoutTeamNestedInput
-  finances?: Prisma.TeamFinanceUpdateManyWithoutTeamNestedInput
-  transferListings?: Prisma.TransferListingUpdateManyWithoutSellerTeamNestedInput
-  soldTransactions?: Prisma.TransferTransactionUpdateManyWithoutSellerTeamNestedInput
-  boughtTransactions?: Prisma.TransferTransactionUpdateManyWithoutBuyerTeamNestedInput
+  sellTransactions?: Prisma.TransferTransactionUpdateManyWithoutSellerTeamNestedInput
+  buyTransactions?: Prisma.TransferTransactionUpdateManyWithoutBuyerTeamNestedInput
+  financeRecords?: Prisma.TeamFinanceUpdateManyWithoutTeamNestedInput
+  transferListings?: Prisma.TransferListingUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
   budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
   isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   players?: Prisma.PlayerUncheckedUpdateManyWithoutTeamNestedInput
-  finances?: Prisma.TeamFinanceUncheckedUpdateManyWithoutTeamNestedInput
-  transferListings?: Prisma.TransferListingUncheckedUpdateManyWithoutSellerTeamNestedInput
-  soldTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutSellerTeamNestedInput
-  boughtTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutBuyerTeamNestedInput
+  sellTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutSellerTeamNestedInput
+  buyTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutBuyerTeamNestedInput
+  financeRecords?: Prisma.TeamFinanceUncheckedUpdateManyWithoutTeamNestedInput
+  transferListings?: Prisma.TransferListingUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateManyInput = {
   id?: string
   userId: string
   name: string
-  country?: string | null
+  country?: string
   budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: number
   isTeamReady?: boolean
@@ -414,7 +414,7 @@ export type TeamCreateManyInput = {
 export type TeamUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
   budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
   isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -426,7 +426,7 @@ export type TeamUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
   budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
   isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -522,10 +522,6 @@ export type TeamUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutUserInput, Prisma.TeamUpdateWithoutUserInput>, Prisma.TeamUncheckedUpdateWithoutUserInput>
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type DecimalFieldUpdateOperationsInput = {
   set?: runtime.Decimal | runtime.DecimalJsLike | number | string
   increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -540,6 +536,20 @@ export type IntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type TeamCreateNestedOneWithoutFinanceRecordsInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutFinanceRecordsInput, Prisma.TeamUncheckedCreateWithoutFinanceRecordsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutFinanceRecordsInput
+  connect?: Prisma.TeamWhereUniqueInput
+}
+
+export type TeamUpdateOneRequiredWithoutFinanceRecordsNestedInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutFinanceRecordsInput, Prisma.TeamUncheckedCreateWithoutFinanceRecordsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutFinanceRecordsInput
+  upsert?: Prisma.TeamUpsertWithoutFinanceRecordsInput
+  connect?: Prisma.TeamWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutFinanceRecordsInput, Prisma.TeamUpdateWithoutFinanceRecordsInput>, Prisma.TeamUncheckedUpdateWithoutFinanceRecordsInput>
 }
 
 export type TeamCreateNestedOneWithoutPlayersInput = {
@@ -570,78 +580,64 @@ export type TeamUpdateOneRequiredWithoutTransferListingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutTransferListingsInput, Prisma.TeamUpdateWithoutTransferListingsInput>, Prisma.TeamUncheckedUpdateWithoutTransferListingsInput>
 }
 
-export type TeamCreateNestedOneWithoutSoldTransactionsInput = {
-  create?: Prisma.XOR<Prisma.TeamCreateWithoutSoldTransactionsInput, Prisma.TeamUncheckedCreateWithoutSoldTransactionsInput>
-  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutSoldTransactionsInput
+export type TeamCreateNestedOneWithoutSellTransactionsInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutSellTransactionsInput, Prisma.TeamUncheckedCreateWithoutSellTransactionsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutSellTransactionsInput
   connect?: Prisma.TeamWhereUniqueInput
 }
 
-export type TeamCreateNestedOneWithoutBoughtTransactionsInput = {
-  create?: Prisma.XOR<Prisma.TeamCreateWithoutBoughtTransactionsInput, Prisma.TeamUncheckedCreateWithoutBoughtTransactionsInput>
-  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutBoughtTransactionsInput
+export type TeamCreateNestedOneWithoutBuyTransactionsInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutBuyTransactionsInput, Prisma.TeamUncheckedCreateWithoutBuyTransactionsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutBuyTransactionsInput
   connect?: Prisma.TeamWhereUniqueInput
 }
 
-export type TeamUpdateOneRequiredWithoutSoldTransactionsNestedInput = {
-  create?: Prisma.XOR<Prisma.TeamCreateWithoutSoldTransactionsInput, Prisma.TeamUncheckedCreateWithoutSoldTransactionsInput>
-  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutSoldTransactionsInput
-  upsert?: Prisma.TeamUpsertWithoutSoldTransactionsInput
+export type TeamUpdateOneRequiredWithoutSellTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutSellTransactionsInput, Prisma.TeamUncheckedCreateWithoutSellTransactionsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutSellTransactionsInput
+  upsert?: Prisma.TeamUpsertWithoutSellTransactionsInput
   connect?: Prisma.TeamWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutSoldTransactionsInput, Prisma.TeamUpdateWithoutSoldTransactionsInput>, Prisma.TeamUncheckedUpdateWithoutSoldTransactionsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutSellTransactionsInput, Prisma.TeamUpdateWithoutSellTransactionsInput>, Prisma.TeamUncheckedUpdateWithoutSellTransactionsInput>
 }
 
-export type TeamUpdateOneRequiredWithoutBoughtTransactionsNestedInput = {
-  create?: Prisma.XOR<Prisma.TeamCreateWithoutBoughtTransactionsInput, Prisma.TeamUncheckedCreateWithoutBoughtTransactionsInput>
-  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutBoughtTransactionsInput
-  upsert?: Prisma.TeamUpsertWithoutBoughtTransactionsInput
+export type TeamUpdateOneRequiredWithoutBuyTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutBuyTransactionsInput, Prisma.TeamUncheckedCreateWithoutBuyTransactionsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutBuyTransactionsInput
+  upsert?: Prisma.TeamUpsertWithoutBuyTransactionsInput
   connect?: Prisma.TeamWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutBoughtTransactionsInput, Prisma.TeamUpdateWithoutBoughtTransactionsInput>, Prisma.TeamUncheckedUpdateWithoutBoughtTransactionsInput>
-}
-
-export type TeamCreateNestedOneWithoutFinancesInput = {
-  create?: Prisma.XOR<Prisma.TeamCreateWithoutFinancesInput, Prisma.TeamUncheckedCreateWithoutFinancesInput>
-  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutFinancesInput
-  connect?: Prisma.TeamWhereUniqueInput
-}
-
-export type TeamUpdateOneRequiredWithoutFinancesNestedInput = {
-  create?: Prisma.XOR<Prisma.TeamCreateWithoutFinancesInput, Prisma.TeamUncheckedCreateWithoutFinancesInput>
-  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutFinancesInput
-  upsert?: Prisma.TeamUpsertWithoutFinancesInput
-  connect?: Prisma.TeamWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutFinancesInput, Prisma.TeamUpdateWithoutFinancesInput>, Prisma.TeamUncheckedUpdateWithoutFinancesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutBuyTransactionsInput, Prisma.TeamUpdateWithoutBuyTransactionsInput>, Prisma.TeamUncheckedUpdateWithoutBuyTransactionsInput>
 }
 
 export type TeamCreateWithoutUserInput = {
   id?: string
   name: string
-  country?: string | null
+  country?: string
   budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: number
   isTeamReady?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   players?: Prisma.PlayerCreateNestedManyWithoutTeamInput
-  finances?: Prisma.TeamFinanceCreateNestedManyWithoutTeamInput
-  transferListings?: Prisma.TransferListingCreateNestedManyWithoutSellerTeamInput
-  soldTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutSellerTeamInput
-  boughtTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutBuyerTeamInput
+  sellTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutSellerTeamInput
+  buyTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutBuyerTeamInput
+  financeRecords?: Prisma.TeamFinanceCreateNestedManyWithoutTeamInput
+  transferListings?: Prisma.TransferListingCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutUserInput = {
   id?: string
   name: string
-  country?: string | null
+  country?: string
   budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: number
   isTeamReady?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   players?: Prisma.PlayerUncheckedCreateNestedManyWithoutTeamInput
-  finances?: Prisma.TeamFinanceUncheckedCreateNestedManyWithoutTeamInput
-  transferListings?: Prisma.TransferListingUncheckedCreateNestedManyWithoutSellerTeamInput
-  soldTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutSellerTeamInput
-  boughtTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutBuyerTeamInput
+  sellTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutSellerTeamInput
+  buyTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutBuyerTeamInput
+  financeRecords?: Prisma.TeamFinanceUncheckedCreateNestedManyWithoutTeamInput
+  transferListings?: Prisma.TransferListingUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutUserInput = {
@@ -663,65 +659,145 @@ export type TeamUpdateToOneWithWhereWithoutUserInput = {
 export type TeamUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
   budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
   isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   players?: Prisma.PlayerUpdateManyWithoutTeamNestedInput
-  finances?: Prisma.TeamFinanceUpdateManyWithoutTeamNestedInput
-  transferListings?: Prisma.TransferListingUpdateManyWithoutSellerTeamNestedInput
-  soldTransactions?: Prisma.TransferTransactionUpdateManyWithoutSellerTeamNestedInput
-  boughtTransactions?: Prisma.TransferTransactionUpdateManyWithoutBuyerTeamNestedInput
+  sellTransactions?: Prisma.TransferTransactionUpdateManyWithoutSellerTeamNestedInput
+  buyTransactions?: Prisma.TransferTransactionUpdateManyWithoutBuyerTeamNestedInput
+  financeRecords?: Prisma.TeamFinanceUpdateManyWithoutTeamNestedInput
+  transferListings?: Prisma.TransferListingUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
   budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
   isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   players?: Prisma.PlayerUncheckedUpdateManyWithoutTeamNestedInput
-  finances?: Prisma.TeamFinanceUncheckedUpdateManyWithoutTeamNestedInput
-  transferListings?: Prisma.TransferListingUncheckedUpdateManyWithoutSellerTeamNestedInput
-  soldTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutSellerTeamNestedInput
-  boughtTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutBuyerTeamNestedInput
+  sellTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutSellerTeamNestedInput
+  buyTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutBuyerTeamNestedInput
+  financeRecords?: Prisma.TeamFinanceUncheckedUpdateManyWithoutTeamNestedInput
+  transferListings?: Prisma.TransferListingUncheckedUpdateManyWithoutTeamNestedInput
 }
 
-export type TeamCreateWithoutPlayersInput = {
+export type TeamCreateWithoutFinanceRecordsInput = {
   id?: string
   name: string
-  country?: string | null
+  country?: string
   budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: number
   isTeamReady?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutTeamInput
-  finances?: Prisma.TeamFinanceCreateNestedManyWithoutTeamInput
-  transferListings?: Prisma.TransferListingCreateNestedManyWithoutSellerTeamInput
-  soldTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutSellerTeamInput
-  boughtTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutBuyerTeamInput
+  players?: Prisma.PlayerCreateNestedManyWithoutTeamInput
+  sellTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutSellerTeamInput
+  buyTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutBuyerTeamInput
+  transferListings?: Prisma.TransferListingCreateNestedManyWithoutTeamInput
+}
+
+export type TeamUncheckedCreateWithoutFinanceRecordsInput = {
+  id?: string
+  userId: string
+  name: string
+  country?: string
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPlayers?: number
+  isTeamReady?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  players?: Prisma.PlayerUncheckedCreateNestedManyWithoutTeamInput
+  sellTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutSellerTeamInput
+  buyTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutBuyerTeamInput
+  transferListings?: Prisma.TransferListingUncheckedCreateNestedManyWithoutTeamInput
+}
+
+export type TeamCreateOrConnectWithoutFinanceRecordsInput = {
+  where: Prisma.TeamWhereUniqueInput
+  create: Prisma.XOR<Prisma.TeamCreateWithoutFinanceRecordsInput, Prisma.TeamUncheckedCreateWithoutFinanceRecordsInput>
+}
+
+export type TeamUpsertWithoutFinanceRecordsInput = {
+  update: Prisma.XOR<Prisma.TeamUpdateWithoutFinanceRecordsInput, Prisma.TeamUncheckedUpdateWithoutFinanceRecordsInput>
+  create: Prisma.XOR<Prisma.TeamCreateWithoutFinanceRecordsInput, Prisma.TeamUncheckedCreateWithoutFinanceRecordsInput>
+  where?: Prisma.TeamWhereInput
+}
+
+export type TeamUpdateToOneWithWhereWithoutFinanceRecordsInput = {
+  where?: Prisma.TeamWhereInput
+  data: Prisma.XOR<Prisma.TeamUpdateWithoutFinanceRecordsInput, Prisma.TeamUncheckedUpdateWithoutFinanceRecordsInput>
+}
+
+export type TeamUpdateWithoutFinanceRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
+  isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutTeamNestedInput
+  players?: Prisma.PlayerUpdateManyWithoutTeamNestedInput
+  sellTransactions?: Prisma.TransferTransactionUpdateManyWithoutSellerTeamNestedInput
+  buyTransactions?: Prisma.TransferTransactionUpdateManyWithoutBuyerTeamNestedInput
+  transferListings?: Prisma.TransferListingUpdateManyWithoutTeamNestedInput
+}
+
+export type TeamUncheckedUpdateWithoutFinanceRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
+  isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  players?: Prisma.PlayerUncheckedUpdateManyWithoutTeamNestedInput
+  sellTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutSellerTeamNestedInput
+  buyTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutBuyerTeamNestedInput
+  transferListings?: Prisma.TransferListingUncheckedUpdateManyWithoutTeamNestedInput
+}
+
+export type TeamCreateWithoutPlayersInput = {
+  id?: string
+  name: string
+  country?: string
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalPlayers?: number
+  isTeamReady?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutTeamInput
+  sellTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutSellerTeamInput
+  buyTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutBuyerTeamInput
+  financeRecords?: Prisma.TeamFinanceCreateNestedManyWithoutTeamInput
+  transferListings?: Prisma.TransferListingCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutPlayersInput = {
   id?: string
   userId: string
   name: string
-  country?: string | null
+  country?: string
   budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: number
   isTeamReady?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  finances?: Prisma.TeamFinanceUncheckedCreateNestedManyWithoutTeamInput
-  transferListings?: Prisma.TransferListingUncheckedCreateNestedManyWithoutSellerTeamInput
-  soldTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutSellerTeamInput
-  boughtTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutBuyerTeamInput
+  sellTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutSellerTeamInput
+  buyTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutBuyerTeamInput
+  financeRecords?: Prisma.TeamFinanceUncheckedCreateNestedManyWithoutTeamInput
+  transferListings?: Prisma.TransferListingUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutPlayersInput = {
@@ -743,39 +819,39 @@ export type TeamUpdateToOneWithWhereWithoutPlayersInput = {
 export type TeamUpdateWithoutPlayersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
   budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
   isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutTeamNestedInput
-  finances?: Prisma.TeamFinanceUpdateManyWithoutTeamNestedInput
-  transferListings?: Prisma.TransferListingUpdateManyWithoutSellerTeamNestedInput
-  soldTransactions?: Prisma.TransferTransactionUpdateManyWithoutSellerTeamNestedInput
-  boughtTransactions?: Prisma.TransferTransactionUpdateManyWithoutBuyerTeamNestedInput
+  sellTransactions?: Prisma.TransferTransactionUpdateManyWithoutSellerTeamNestedInput
+  buyTransactions?: Prisma.TransferTransactionUpdateManyWithoutBuyerTeamNestedInput
+  financeRecords?: Prisma.TeamFinanceUpdateManyWithoutTeamNestedInput
+  transferListings?: Prisma.TransferListingUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutPlayersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
   budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
   isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  finances?: Prisma.TeamFinanceUncheckedUpdateManyWithoutTeamNestedInput
-  transferListings?: Prisma.TransferListingUncheckedUpdateManyWithoutSellerTeamNestedInput
-  soldTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutSellerTeamNestedInput
-  boughtTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutBuyerTeamNestedInput
+  sellTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutSellerTeamNestedInput
+  buyTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutBuyerTeamNestedInput
+  financeRecords?: Prisma.TeamFinanceUncheckedUpdateManyWithoutTeamNestedInput
+  transferListings?: Prisma.TransferListingUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateWithoutTransferListingsInput = {
   id?: string
   name: string
-  country?: string | null
+  country?: string
   budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: number
   isTeamReady?: boolean
@@ -783,25 +859,25 @@ export type TeamCreateWithoutTransferListingsInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutTeamInput
   players?: Prisma.PlayerCreateNestedManyWithoutTeamInput
-  finances?: Prisma.TeamFinanceCreateNestedManyWithoutTeamInput
-  soldTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutSellerTeamInput
-  boughtTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutBuyerTeamInput
+  sellTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutSellerTeamInput
+  buyTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutBuyerTeamInput
+  financeRecords?: Prisma.TeamFinanceCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutTransferListingsInput = {
   id?: string
   userId: string
   name: string
-  country?: string | null
+  country?: string
   budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: number
   isTeamReady?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   players?: Prisma.PlayerUncheckedCreateNestedManyWithoutTeamInput
-  finances?: Prisma.TeamFinanceUncheckedCreateNestedManyWithoutTeamInput
-  soldTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutSellerTeamInput
-  boughtTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutBuyerTeamInput
+  sellTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutSellerTeamInput
+  buyTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutBuyerTeamInput
+  financeRecords?: Prisma.TeamFinanceUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutTransferListingsInput = {
@@ -823,7 +899,7 @@ export type TeamUpdateToOneWithWhereWithoutTransferListingsInput = {
 export type TeamUpdateWithoutTransferListingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
   budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
   isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -831,31 +907,31 @@ export type TeamUpdateWithoutTransferListingsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutTeamNestedInput
   players?: Prisma.PlayerUpdateManyWithoutTeamNestedInput
-  finances?: Prisma.TeamFinanceUpdateManyWithoutTeamNestedInput
-  soldTransactions?: Prisma.TransferTransactionUpdateManyWithoutSellerTeamNestedInput
-  boughtTransactions?: Prisma.TransferTransactionUpdateManyWithoutBuyerTeamNestedInput
+  sellTransactions?: Prisma.TransferTransactionUpdateManyWithoutSellerTeamNestedInput
+  buyTransactions?: Prisma.TransferTransactionUpdateManyWithoutBuyerTeamNestedInput
+  financeRecords?: Prisma.TeamFinanceUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutTransferListingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
   budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
   isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   players?: Prisma.PlayerUncheckedUpdateManyWithoutTeamNestedInput
-  finances?: Prisma.TeamFinanceUncheckedUpdateManyWithoutTeamNestedInput
-  soldTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutSellerTeamNestedInput
-  boughtTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutBuyerTeamNestedInput
+  sellTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutSellerTeamNestedInput
+  buyTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutBuyerTeamNestedInput
+  financeRecords?: Prisma.TeamFinanceUncheckedUpdateManyWithoutTeamNestedInput
 }
 
-export type TeamCreateWithoutSoldTransactionsInput = {
+export type TeamCreateWithoutSellTransactionsInput = {
   id?: string
   name: string
-  country?: string | null
+  country?: string
   budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: number
   isTeamReady?: boolean
@@ -863,36 +939,36 @@ export type TeamCreateWithoutSoldTransactionsInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutTeamInput
   players?: Prisma.PlayerCreateNestedManyWithoutTeamInput
-  finances?: Prisma.TeamFinanceCreateNestedManyWithoutTeamInput
-  transferListings?: Prisma.TransferListingCreateNestedManyWithoutSellerTeamInput
-  boughtTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutBuyerTeamInput
+  buyTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutBuyerTeamInput
+  financeRecords?: Prisma.TeamFinanceCreateNestedManyWithoutTeamInput
+  transferListings?: Prisma.TransferListingCreateNestedManyWithoutTeamInput
 }
 
-export type TeamUncheckedCreateWithoutSoldTransactionsInput = {
+export type TeamUncheckedCreateWithoutSellTransactionsInput = {
   id?: string
   userId: string
   name: string
-  country?: string | null
+  country?: string
   budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: number
   isTeamReady?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   players?: Prisma.PlayerUncheckedCreateNestedManyWithoutTeamInput
-  finances?: Prisma.TeamFinanceUncheckedCreateNestedManyWithoutTeamInput
-  transferListings?: Prisma.TransferListingUncheckedCreateNestedManyWithoutSellerTeamInput
-  boughtTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutBuyerTeamInput
+  buyTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutBuyerTeamInput
+  financeRecords?: Prisma.TeamFinanceUncheckedCreateNestedManyWithoutTeamInput
+  transferListings?: Prisma.TransferListingUncheckedCreateNestedManyWithoutTeamInput
 }
 
-export type TeamCreateOrConnectWithoutSoldTransactionsInput = {
+export type TeamCreateOrConnectWithoutSellTransactionsInput = {
   where: Prisma.TeamWhereUniqueInput
-  create: Prisma.XOR<Prisma.TeamCreateWithoutSoldTransactionsInput, Prisma.TeamUncheckedCreateWithoutSoldTransactionsInput>
+  create: Prisma.XOR<Prisma.TeamCreateWithoutSellTransactionsInput, Prisma.TeamUncheckedCreateWithoutSellTransactionsInput>
 }
 
-export type TeamCreateWithoutBoughtTransactionsInput = {
+export type TeamCreateWithoutBuyTransactionsInput = {
   id?: string
   name: string
-  country?: string | null
+  country?: string
   budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: number
   isTeamReady?: boolean
@@ -900,47 +976,47 @@ export type TeamCreateWithoutBoughtTransactionsInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutTeamInput
   players?: Prisma.PlayerCreateNestedManyWithoutTeamInput
-  finances?: Prisma.TeamFinanceCreateNestedManyWithoutTeamInput
-  transferListings?: Prisma.TransferListingCreateNestedManyWithoutSellerTeamInput
-  soldTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutSellerTeamInput
+  sellTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutSellerTeamInput
+  financeRecords?: Prisma.TeamFinanceCreateNestedManyWithoutTeamInput
+  transferListings?: Prisma.TransferListingCreateNestedManyWithoutTeamInput
 }
 
-export type TeamUncheckedCreateWithoutBoughtTransactionsInput = {
+export type TeamUncheckedCreateWithoutBuyTransactionsInput = {
   id?: string
   userId: string
   name: string
-  country?: string | null
+  country?: string
   budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: number
   isTeamReady?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   players?: Prisma.PlayerUncheckedCreateNestedManyWithoutTeamInput
-  finances?: Prisma.TeamFinanceUncheckedCreateNestedManyWithoutTeamInput
-  transferListings?: Prisma.TransferListingUncheckedCreateNestedManyWithoutSellerTeamInput
-  soldTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutSellerTeamInput
+  sellTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutSellerTeamInput
+  financeRecords?: Prisma.TeamFinanceUncheckedCreateNestedManyWithoutTeamInput
+  transferListings?: Prisma.TransferListingUncheckedCreateNestedManyWithoutTeamInput
 }
 
-export type TeamCreateOrConnectWithoutBoughtTransactionsInput = {
+export type TeamCreateOrConnectWithoutBuyTransactionsInput = {
   where: Prisma.TeamWhereUniqueInput
-  create: Prisma.XOR<Prisma.TeamCreateWithoutBoughtTransactionsInput, Prisma.TeamUncheckedCreateWithoutBoughtTransactionsInput>
+  create: Prisma.XOR<Prisma.TeamCreateWithoutBuyTransactionsInput, Prisma.TeamUncheckedCreateWithoutBuyTransactionsInput>
 }
 
-export type TeamUpsertWithoutSoldTransactionsInput = {
-  update: Prisma.XOR<Prisma.TeamUpdateWithoutSoldTransactionsInput, Prisma.TeamUncheckedUpdateWithoutSoldTransactionsInput>
-  create: Prisma.XOR<Prisma.TeamCreateWithoutSoldTransactionsInput, Prisma.TeamUncheckedCreateWithoutSoldTransactionsInput>
+export type TeamUpsertWithoutSellTransactionsInput = {
+  update: Prisma.XOR<Prisma.TeamUpdateWithoutSellTransactionsInput, Prisma.TeamUncheckedUpdateWithoutSellTransactionsInput>
+  create: Prisma.XOR<Prisma.TeamCreateWithoutSellTransactionsInput, Prisma.TeamUncheckedCreateWithoutSellTransactionsInput>
   where?: Prisma.TeamWhereInput
 }
 
-export type TeamUpdateToOneWithWhereWithoutSoldTransactionsInput = {
+export type TeamUpdateToOneWithWhereWithoutSellTransactionsInput = {
   where?: Prisma.TeamWhereInput
-  data: Prisma.XOR<Prisma.TeamUpdateWithoutSoldTransactionsInput, Prisma.TeamUncheckedUpdateWithoutSoldTransactionsInput>
+  data: Prisma.XOR<Prisma.TeamUpdateWithoutSellTransactionsInput, Prisma.TeamUncheckedUpdateWithoutSellTransactionsInput>
 }
 
-export type TeamUpdateWithoutSoldTransactionsInput = {
+export type TeamUpdateWithoutSellTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
   budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
   isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -948,42 +1024,42 @@ export type TeamUpdateWithoutSoldTransactionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutTeamNestedInput
   players?: Prisma.PlayerUpdateManyWithoutTeamNestedInput
-  finances?: Prisma.TeamFinanceUpdateManyWithoutTeamNestedInput
-  transferListings?: Prisma.TransferListingUpdateManyWithoutSellerTeamNestedInput
-  boughtTransactions?: Prisma.TransferTransactionUpdateManyWithoutBuyerTeamNestedInput
+  buyTransactions?: Prisma.TransferTransactionUpdateManyWithoutBuyerTeamNestedInput
+  financeRecords?: Prisma.TeamFinanceUpdateManyWithoutTeamNestedInput
+  transferListings?: Prisma.TransferListingUpdateManyWithoutTeamNestedInput
 }
 
-export type TeamUncheckedUpdateWithoutSoldTransactionsInput = {
+export type TeamUncheckedUpdateWithoutSellTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
   budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
   isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   players?: Prisma.PlayerUncheckedUpdateManyWithoutTeamNestedInput
-  finances?: Prisma.TeamFinanceUncheckedUpdateManyWithoutTeamNestedInput
-  transferListings?: Prisma.TransferListingUncheckedUpdateManyWithoutSellerTeamNestedInput
-  boughtTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutBuyerTeamNestedInput
+  buyTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutBuyerTeamNestedInput
+  financeRecords?: Prisma.TeamFinanceUncheckedUpdateManyWithoutTeamNestedInput
+  transferListings?: Prisma.TransferListingUncheckedUpdateManyWithoutTeamNestedInput
 }
 
-export type TeamUpsertWithoutBoughtTransactionsInput = {
-  update: Prisma.XOR<Prisma.TeamUpdateWithoutBoughtTransactionsInput, Prisma.TeamUncheckedUpdateWithoutBoughtTransactionsInput>
-  create: Prisma.XOR<Prisma.TeamCreateWithoutBoughtTransactionsInput, Prisma.TeamUncheckedCreateWithoutBoughtTransactionsInput>
+export type TeamUpsertWithoutBuyTransactionsInput = {
+  update: Prisma.XOR<Prisma.TeamUpdateWithoutBuyTransactionsInput, Prisma.TeamUncheckedUpdateWithoutBuyTransactionsInput>
+  create: Prisma.XOR<Prisma.TeamCreateWithoutBuyTransactionsInput, Prisma.TeamUncheckedCreateWithoutBuyTransactionsInput>
   where?: Prisma.TeamWhereInput
 }
 
-export type TeamUpdateToOneWithWhereWithoutBoughtTransactionsInput = {
+export type TeamUpdateToOneWithWhereWithoutBuyTransactionsInput = {
   where?: Prisma.TeamWhereInput
-  data: Prisma.XOR<Prisma.TeamUpdateWithoutBoughtTransactionsInput, Prisma.TeamUncheckedUpdateWithoutBoughtTransactionsInput>
+  data: Prisma.XOR<Prisma.TeamUpdateWithoutBuyTransactionsInput, Prisma.TeamUncheckedUpdateWithoutBuyTransactionsInput>
 }
 
-export type TeamUpdateWithoutBoughtTransactionsInput = {
+export type TeamUpdateWithoutBuyTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
   budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
   isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -991,105 +1067,25 @@ export type TeamUpdateWithoutBoughtTransactionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutTeamNestedInput
   players?: Prisma.PlayerUpdateManyWithoutTeamNestedInput
-  finances?: Prisma.TeamFinanceUpdateManyWithoutTeamNestedInput
-  transferListings?: Prisma.TransferListingUpdateManyWithoutSellerTeamNestedInput
-  soldTransactions?: Prisma.TransferTransactionUpdateManyWithoutSellerTeamNestedInput
+  sellTransactions?: Prisma.TransferTransactionUpdateManyWithoutSellerTeamNestedInput
+  financeRecords?: Prisma.TeamFinanceUpdateManyWithoutTeamNestedInput
+  transferListings?: Prisma.TransferListingUpdateManyWithoutTeamNestedInput
 }
 
-export type TeamUncheckedUpdateWithoutBoughtTransactionsInput = {
+export type TeamUncheckedUpdateWithoutBuyTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
   budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
   isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   players?: Prisma.PlayerUncheckedUpdateManyWithoutTeamNestedInput
-  finances?: Prisma.TeamFinanceUncheckedUpdateManyWithoutTeamNestedInput
-  transferListings?: Prisma.TransferListingUncheckedUpdateManyWithoutSellerTeamNestedInput
-  soldTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutSellerTeamNestedInput
-}
-
-export type TeamCreateWithoutFinancesInput = {
-  id?: string
-  name: string
-  country?: string | null
-  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPlayers?: number
-  isTeamReady?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutTeamInput
-  players?: Prisma.PlayerCreateNestedManyWithoutTeamInput
-  transferListings?: Prisma.TransferListingCreateNestedManyWithoutSellerTeamInput
-  soldTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutSellerTeamInput
-  boughtTransactions?: Prisma.TransferTransactionCreateNestedManyWithoutBuyerTeamInput
-}
-
-export type TeamUncheckedCreateWithoutFinancesInput = {
-  id?: string
-  userId: string
-  name: string
-  country?: string | null
-  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPlayers?: number
-  isTeamReady?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  players?: Prisma.PlayerUncheckedCreateNestedManyWithoutTeamInput
-  transferListings?: Prisma.TransferListingUncheckedCreateNestedManyWithoutSellerTeamInput
-  soldTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutSellerTeamInput
-  boughtTransactions?: Prisma.TransferTransactionUncheckedCreateNestedManyWithoutBuyerTeamInput
-}
-
-export type TeamCreateOrConnectWithoutFinancesInput = {
-  where: Prisma.TeamWhereUniqueInput
-  create: Prisma.XOR<Prisma.TeamCreateWithoutFinancesInput, Prisma.TeamUncheckedCreateWithoutFinancesInput>
-}
-
-export type TeamUpsertWithoutFinancesInput = {
-  update: Prisma.XOR<Prisma.TeamUpdateWithoutFinancesInput, Prisma.TeamUncheckedUpdateWithoutFinancesInput>
-  create: Prisma.XOR<Prisma.TeamCreateWithoutFinancesInput, Prisma.TeamUncheckedCreateWithoutFinancesInput>
-  where?: Prisma.TeamWhereInput
-}
-
-export type TeamUpdateToOneWithWhereWithoutFinancesInput = {
-  where?: Prisma.TeamWhereInput
-  data: Prisma.XOR<Prisma.TeamUpdateWithoutFinancesInput, Prisma.TeamUncheckedUpdateWithoutFinancesInput>
-}
-
-export type TeamUpdateWithoutFinancesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
-  isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutTeamNestedInput
-  players?: Prisma.PlayerUpdateManyWithoutTeamNestedInput
-  transferListings?: Prisma.TransferListingUpdateManyWithoutSellerTeamNestedInput
-  soldTransactions?: Prisma.TransferTransactionUpdateManyWithoutSellerTeamNestedInput
-  boughtTransactions?: Prisma.TransferTransactionUpdateManyWithoutBuyerTeamNestedInput
-}
-
-export type TeamUncheckedUpdateWithoutFinancesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPlayers?: Prisma.IntFieldUpdateOperationsInput | number
-  isTeamReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  players?: Prisma.PlayerUncheckedUpdateManyWithoutTeamNestedInput
-  transferListings?: Prisma.TransferListingUncheckedUpdateManyWithoutSellerTeamNestedInput
-  soldTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutSellerTeamNestedInput
-  boughtTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutBuyerTeamNestedInput
+  sellTransactions?: Prisma.TransferTransactionUncheckedUpdateManyWithoutSellerTeamNestedInput
+  financeRecords?: Prisma.TeamFinanceUncheckedUpdateManyWithoutTeamNestedInput
+  transferListings?: Prisma.TransferListingUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 
@@ -1099,18 +1095,18 @@ export type TeamUncheckedUpdateWithoutFinancesInput = {
 
 export type TeamCountOutputType = {
   players: number
-  finances: number
+  sellTransactions: number
+  buyTransactions: number
+  financeRecords: number
   transferListings: number
-  soldTransactions: number
-  boughtTransactions: number
 }
 
 export type TeamCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   players?: boolean | TeamCountOutputTypeCountPlayersArgs
-  finances?: boolean | TeamCountOutputTypeCountFinancesArgs
+  sellTransactions?: boolean | TeamCountOutputTypeCountSellTransactionsArgs
+  buyTransactions?: boolean | TeamCountOutputTypeCountBuyTransactionsArgs
+  financeRecords?: boolean | TeamCountOutputTypeCountFinanceRecordsArgs
   transferListings?: boolean | TeamCountOutputTypeCountTransferListingsArgs
-  soldTransactions?: boolean | TeamCountOutputTypeCountSoldTransactionsArgs
-  boughtTransactions?: boolean | TeamCountOutputTypeCountBoughtTransactionsArgs
 }
 
 /**
@@ -1133,7 +1129,21 @@ export type TeamCountOutputTypeCountPlayersArgs<ExtArgs extends runtime.Types.Ex
 /**
  * TeamCountOutputType without action
  */
-export type TeamCountOutputTypeCountFinancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type TeamCountOutputTypeCountSellTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TransferTransactionWhereInput
+}
+
+/**
+ * TeamCountOutputType without action
+ */
+export type TeamCountOutputTypeCountBuyTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TransferTransactionWhereInput
+}
+
+/**
+ * TeamCountOutputType without action
+ */
+export type TeamCountOutputTypeCountFinanceRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TeamFinanceWhereInput
 }
 
@@ -1142,20 +1152,6 @@ export type TeamCountOutputTypeCountFinancesArgs<ExtArgs extends runtime.Types.E
  */
 export type TeamCountOutputTypeCountTransferListingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TransferListingWhereInput
-}
-
-/**
- * TeamCountOutputType without action
- */
-export type TeamCountOutputTypeCountSoldTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TransferTransactionWhereInput
-}
-
-/**
- * TeamCountOutputType without action
- */
-export type TeamCountOutputTypeCountBoughtTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TransferTransactionWhereInput
 }
 
 
@@ -1171,10 +1167,10 @@ export type TeamSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   players?: boolean | Prisma.Team$playersArgs<ExtArgs>
-  finances?: boolean | Prisma.Team$financesArgs<ExtArgs>
+  sellTransactions?: boolean | Prisma.Team$sellTransactionsArgs<ExtArgs>
+  buyTransactions?: boolean | Prisma.Team$buyTransactionsArgs<ExtArgs>
+  financeRecords?: boolean | Prisma.Team$financeRecordsArgs<ExtArgs>
   transferListings?: boolean | Prisma.Team$transferListingsArgs<ExtArgs>
-  soldTransactions?: boolean | Prisma.Team$soldTransactionsArgs<ExtArgs>
-  boughtTransactions?: boolean | Prisma.Team$boughtTransactionsArgs<ExtArgs>
   _count?: boolean | Prisma.TeamCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["team"]>
 
@@ -1220,10 +1216,10 @@ export type TeamOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type TeamInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   players?: boolean | Prisma.Team$playersArgs<ExtArgs>
-  finances?: boolean | Prisma.Team$financesArgs<ExtArgs>
+  sellTransactions?: boolean | Prisma.Team$sellTransactionsArgs<ExtArgs>
+  buyTransactions?: boolean | Prisma.Team$buyTransactionsArgs<ExtArgs>
+  financeRecords?: boolean | Prisma.Team$financeRecordsArgs<ExtArgs>
   transferListings?: boolean | Prisma.Team$transferListingsArgs<ExtArgs>
-  soldTransactions?: boolean | Prisma.Team$soldTransactionsArgs<ExtArgs>
-  boughtTransactions?: boolean | Prisma.Team$boughtTransactionsArgs<ExtArgs>
   _count?: boolean | Prisma.TeamCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TeamIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1238,16 +1234,16 @@ export type $TeamPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     players: Prisma.$PlayerPayload<ExtArgs>[]
-    finances: Prisma.$TeamFinancePayload<ExtArgs>[]
+    sellTransactions: Prisma.$TransferTransactionPayload<ExtArgs>[]
+    buyTransactions: Prisma.$TransferTransactionPayload<ExtArgs>[]
+    financeRecords: Prisma.$TeamFinancePayload<ExtArgs>[]
     transferListings: Prisma.$TransferListingPayload<ExtArgs>[]
-    soldTransactions: Prisma.$TransferTransactionPayload<ExtArgs>[]
-    boughtTransactions: Prisma.$TransferTransactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
     name: string
-    country: string | null
+    country: string
     budget: runtime.Decimal
     totalPlayers: number
     isTeamReady: boolean
@@ -1649,10 +1645,10 @@ export interface Prisma__TeamClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   players<T extends Prisma.Team$playersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$playersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  finances<T extends Prisma.Team$financesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$financesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamFinancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sellTransactions<T extends Prisma.Team$sellTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$sellTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransferTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  buyTransactions<T extends Prisma.Team$buyTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$buyTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransferTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  financeRecords<T extends Prisma.Team$financeRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$financeRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamFinancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   transferListings<T extends Prisma.Team$transferListingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$transferListingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransferListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  soldTransactions<T extends Prisma.Team$soldTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$soldTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransferTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  boughtTransactions<T extends Prisma.Team$boughtTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$boughtTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransferTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2111,9 +2107,57 @@ export type Team$playersArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 /**
- * Team.finances
+ * Team.sellTransactions
  */
-export type Team$financesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Team$sellTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TransferTransaction
+   */
+  select?: Prisma.TransferTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TransferTransaction
+   */
+  omit?: Prisma.TransferTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransferTransactionInclude<ExtArgs> | null
+  where?: Prisma.TransferTransactionWhereInput
+  orderBy?: Prisma.TransferTransactionOrderByWithRelationInput | Prisma.TransferTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.TransferTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TransferTransactionScalarFieldEnum | Prisma.TransferTransactionScalarFieldEnum[]
+}
+
+/**
+ * Team.buyTransactions
+ */
+export type Team$buyTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TransferTransaction
+   */
+  select?: Prisma.TransferTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TransferTransaction
+   */
+  omit?: Prisma.TransferTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransferTransactionInclude<ExtArgs> | null
+  where?: Prisma.TransferTransactionWhereInput
+  orderBy?: Prisma.TransferTransactionOrderByWithRelationInput | Prisma.TransferTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.TransferTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TransferTransactionScalarFieldEnum | Prisma.TransferTransactionScalarFieldEnum[]
+}
+
+/**
+ * Team.financeRecords
+ */
+export type Team$financeRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the TeamFinance
    */
@@ -2156,54 +2200,6 @@ export type Team$transferListingsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.TransferListingScalarFieldEnum | Prisma.TransferListingScalarFieldEnum[]
-}
-
-/**
- * Team.soldTransactions
- */
-export type Team$soldTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the TransferTransaction
-   */
-  select?: Prisma.TransferTransactionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the TransferTransaction
-   */
-  omit?: Prisma.TransferTransactionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TransferTransactionInclude<ExtArgs> | null
-  where?: Prisma.TransferTransactionWhereInput
-  orderBy?: Prisma.TransferTransactionOrderByWithRelationInput | Prisma.TransferTransactionOrderByWithRelationInput[]
-  cursor?: Prisma.TransferTransactionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.TransferTransactionScalarFieldEnum | Prisma.TransferTransactionScalarFieldEnum[]
-}
-
-/**
- * Team.boughtTransactions
- */
-export type Team$boughtTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the TransferTransaction
-   */
-  select?: Prisma.TransferTransactionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the TransferTransaction
-   */
-  omit?: Prisma.TransferTransactionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TransferTransactionInclude<ExtArgs> | null
-  where?: Prisma.TransferTransactionWhereInput
-  orderBy?: Prisma.TransferTransactionOrderByWithRelationInput | Prisma.TransferTransactionOrderByWithRelationInput[]
-  cursor?: Prisma.TransferTransactionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.TransferTransactionScalarFieldEnum | Prisma.TransferTransactionScalarFieldEnum[]
 }
 
 /**

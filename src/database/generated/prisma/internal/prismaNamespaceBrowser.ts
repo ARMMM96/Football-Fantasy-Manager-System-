@@ -53,12 +53,12 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Role: 'Role',
   User: 'User',
-  Team: 'Team',
-  Player: 'Player',
   Session: 'Session',
+  Team: 'Team',
+  TeamFinance: 'TeamFinance',
+  Player: 'Player',
   TransferListing: 'TransferListing',
   TransferTransaction: 'TransferTransaction',
-  TeamFinance: 'TeamFinance',
   AuditLog: 'AuditLog'
 } as const
 
@@ -105,6 +105,19 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const SessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  ipAddress: 'ipAddress',
+  expiresAt: 'expiresAt',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
+} as const
+
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
 export const TeamScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -118,6 +131,20 @@ export const TeamScalarFieldEnum = {
 } as const
 
 export type TeamScalarFieldEnum = (typeof TeamScalarFieldEnum)[keyof typeof TeamScalarFieldEnum]
+
+
+export const TeamFinanceScalarFieldEnum = {
+  id: 'id',
+  teamId: 'teamId',
+  transactionType: 'transactionType',
+  amount: 'amount',
+  balanceAfter: 'balanceAfter',
+  description: 'description',
+  referenceTransactionId: 'referenceTransactionId',
+  transactionDate: 'transactionDate'
+} as const
+
+export type TeamFinanceScalarFieldEnum = (typeof TeamFinanceScalarFieldEnum)[keyof typeof TeamFinanceScalarFieldEnum]
 
 
 export const PlayerScalarFieldEnum = {
@@ -136,19 +163,6 @@ export const PlayerScalarFieldEnum = {
 } as const
 
 export type PlayerScalarFieldEnum = (typeof PlayerScalarFieldEnum)[keyof typeof PlayerScalarFieldEnum]
-
-
-export const SessionScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  tokenHash: 'tokenHash',
-  ipAddress: 'ipAddress',
-  expiresAt: 'expiresAt',
-  isActive: 'isActive',
-  createdAt: 'createdAt'
-} as const
-
-export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
 export const TransferListingScalarFieldEnum = {
@@ -178,20 +192,6 @@ export const TransferTransactionScalarFieldEnum = {
 export type TransferTransactionScalarFieldEnum = (typeof TransferTransactionScalarFieldEnum)[keyof typeof TransferTransactionScalarFieldEnum]
 
 
-export const TeamFinanceScalarFieldEnum = {
-  id: 'id',
-  teamId: 'teamId',
-  transactionType: 'transactionType',
-  amount: 'amount',
-  balanceAfter: 'balanceAfter',
-  description: 'description',
-  referenceTransactionId: 'referenceTransactionId',
-  transactionDate: 'transactionDate'
-} as const
-
-export type TeamFinanceScalarFieldEnum = (typeof TeamFinanceScalarFieldEnum)[keyof typeof TeamFinanceScalarFieldEnum]
-
-
 export const AuditLogScalarFieldEnum = {
   id: 'id',
   entityType: 'entityType',
@@ -211,6 +211,13 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: 'JsonNull'
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const NullableJsonNullValueInput = {
